@@ -1,0 +1,86 @@
+.select-group {
+  width: 100%;
+}
+
+.select-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.select-required {
+  color: var(--error);
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-field {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 46px 12px 16px;
+
+  color: var(--text);
+  background-color: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  outline: none;
+
+  cursor: pointer;
+  appearance: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.select-field:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.select-field--error {
+  border-color: var(--error);
+}
+
+.select-field--error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.select-field:disabled {
+  cursor: not-allowed;
+  background-color: #e9edf2;
+  opacity: 0.7;
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+
+  color: var(--text-muted);
+  pointer-events: none;
+
+  transform: translateY(-50%);
+}
+
+.select-message {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.select-message--error {
+  color: var(--error);
+}
+
+@media (max-width: 768px) {
+  .select-field {
+    min-height: 48px;
+  }
+}
