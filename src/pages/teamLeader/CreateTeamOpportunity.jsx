@@ -1,8 +1,11 @@
+
 import { useState } from "react";
 import {
-  LayoutDashboard,
   Plus,
-  FileText,
+  Trash2,
+  LayoutDashboard,
+  FilePlus2,
+  Files,
   UsersRound,
   Send,
 } from "lucide-react";
@@ -10,70 +13,69 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import "./CreateTeamOpportunity.css";
 
 const sidebarItems = [
-  { label: "Create Team Opportunity", to: "/team-leader/create", icon: Plus },
-  { label: "My Opportunities", to: "/team-leader/opportunities", icon: FileText },
+  { label: "Create Team Opportunity", to: "/team-leader/create", icon: FilePlus2 },
+  { label: "My Opportunities", to: "/team-leader/opportunities", icon: Files },
   { label: "Applications Management", to: "/team-leader/applications", icon: UsersRound },
   { label: "My Team", to: "/team-leader/team", icon: UsersRound },
   { label: "Team Updates", to: "/team-leader/updates", icon: Send },
 ];
 
-const emptyForm = {
+const initialForm = {
   title: "",
-  description: "",
   type: "",
-  goals: "",
   deadline: "",
-  courseName: "",
-  courseSection: "",
+  description: "",
+  goals: "",
+};
+
+const initialRole = {
+  title: "",
+  skills: "",
+  experience: "",
+  members: "1",
 };
 
 function CreateTeamOpportunity() {
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState(initialForm);
   const [roles, setRoles] = useState([]);
-  const [role, setRole] = useState({
-    title: "",
-    skills: "",
-    experience: "",
-    members: "",
-  });
+  const [role, setRole] = useState(initialRole);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
-  const [showConfirm, setShowConfirm] = useState(false);
 
   const updateForm = (event) => {
     const { name, value } = event.target;
-    setForm((current) => ({ ...current, [name]: value }));
-    setErrors((current) => ({ ...current, [name]: "" }));
-    setMessage("");
+
+    setForm((current) => ({
+      ...current,
+      [name]: value,
+    }));
+
+    setErrors((current) => ({
+      ...current,
+      [name]: "",
+    }));
   };
 
   const updateRole = (event) => {
     const { name, value } = event.target;
-    setRole((current) => ({ ...current, [name]: value }));
-    setErrors((current) => ({ ...current, [name]: "" }));
-    setMessage("");
+
+    setRole((current) => ({
+      ...current,
+      [name]: value,
+    }));
   };
 
   const validateStepOne = () => {
     const nextErrors = {};
 
     if (!form.title.trim()) nextErrors.title = "Title is required.";
+    if (!form.type) nextErrors.type = "Opportunity type is required.";
+    if (!form.deadline) nextErrors.deadline = "Application deadline is required.";
     if (!form.description.trim()) {
       nextErrors.description = "Description is required.";
     }
-    if (!form.type) nextErrors.type = "Opportunity type is required.";
     if (!form.goals.trim()) nextErrors.goals = "Goals are required.";
-    if (!form.deadline) nextErrors.deadline = "Application deadline is required.";
-
-    if (form.type === "Course Project") {
-      if (!form.courseName.trim()) {
-        nextErrors.courseName = "Course name is required.";
-      }
-      if (!form.courseSection.trim()) {
-        nextErrors.courseSection = "Course section is required.";
-      }
-    }
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -83,64 +85,64 @@ function CreateTeamOpportunity() {
     const nextErrors = {};
 
     if (!role.title.trim()) nextErrors.roleTitle = "Role title is required.";
-    if (!role.skills.trim()) nextErrors.skills = "Required skills are required.";
-    if (!role.experience.trim()) {
-      nextErrors.experience = "Preferred experience is required.";
-    }
-    if (!role.members) {
-      nextErrors.members = "Number of members is required.";
-    } else if (Number(role.members) <= 0) {
-      nextErrors.members = "Enter a valid number greater than 0.";
-    }
+    if (!role.skills.trim()) nextErrors.roleSkills = "Required skills are required.";
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
+  };
+
+  const continueToRoles = (event) => {
+    event.preventDefault();
+
+    if (!validateStepOne()) {
+      setMessage("Please complete the required fields.");
+      return;
+    }
+
+    setMessage("");
+    setStep(2);
   };
 
   const addRole = () => {
     if (!validateRole()) return;
 
     setRoles((current) => [...current, role]);
-    setRole({
-      title: "",
-      skills: "",
-      experience: "",
-      members: "",
-    });
+    setRole(initialRole);
     setErrors({});
   };
 
   const removeRole = (index) => {
-    setRoles((current) => current.filter((_, roleIndex) => roleIndex !== index));
+    setRoles((current) => current.filter((_, itemIndex) => itemIndex !== index));
   };
 
   const saveDraft = () => {
-    const hasInformation =
-      Object.values(form).some((value) => value.trim()) ||
-      roles.length > 0 ||
-      Object.values(role).some((value) => value.trim());
+    const hasInformation = Object.values(form).some((value) => value.trim());
 
-    setMessage(
-      hasInformation
-        ? "Draft saved successfully."
-        : "Please enter some information before saving the draft.",
-    );
-  };
-
-  const publishOpportunity = () => {
-    const validForm = validateStepOne();
-
-    if (!validForm || roles.length === 0) {
-      setMessage("Please complete all required fields before publishing.");
+    if (!hasInformation) {
+      setMessage("Please enter some information before saving the draft.");
       return;
     }
 
-    setShowConfirm(true);
+    setMessage("Draft saved successfully.");
   };
+const publishOpportunity = () => {
+  if (roles.length === 0) {
+    setMessage("Add at least one required role before publishing.");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
 
-  const confirmPublish = () => {
-    setShowConfirm(false);
-    setMessage("Opportunity published successfully.");
+  setMessage("Opportunity published successfully.");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+  const cancelForm = () => {
+    setForm(initialForm);
+    setRoles([]);
+    setRole(initialRole);
+    setErrors({});
+    setMessage("");
+    setStep(1);
   };
 
   return (
@@ -149,224 +151,227 @@ function CreateTeamOpportunity() {
       activeArea="Manage a Team"
       studentName="[Student Name]"
     >
-      <div className="team-opportunity-page">
-        <div className="page-heading">
-          <div>
-            <h1>Create Team Opportunity</h1>
-            <p>Create an opportunity and find suitable students for your team.</p>
+      <section className="team-opportunity-page">
+        <header className="page-heading">
+          <h1>Create Team Opportunity</h1>
+          <p>
+            Step {step} of 2 ·{" "}
+            {step === 1 ? "Opportunity Information" : "Required Roles"}
+          </p>
+        </header>
+
+        <div className="opportunity-stepper">
+          <div className={`stepper-item ${step >= 1 ? "active" : ""}`}>
+            <span>1</span>
+            <strong>Opportunity Information</strong>
           </div>
 
-          <button className="outline-button" type="button" onClick={saveDraft}>
-            Save as Draft
-          </button>
-        </div>
+          <div className="stepper-line" />
 
-        <div className="form-steps">
-          <span className={step === 1 ? "step active" : "step"}>1 Opportunity Details</span>
-          <span className={step === 2 ? "step active" : "step"}>2 Required Roles</span>
+          <div className={`stepper-item ${step === 2 ? "active" : ""}`}>
+            <span>2</span>
+            <strong>Required Roles</strong>
+          </div>
         </div>
 
         {message && <div className="form-message">{message}</div>}
 
-        {step === 1 && (
-          <section className="opportunity-card">
+        {step === 1 ? (
+          <form className="opportunity-card" onSubmit={continueToRoles}>
             <div className="form-grid">
               <Field
                 label="Title"
                 name="title"
                 value={form.title}
                 onChange={updateForm}
-                error={errors.title}
                 placeholder="Enter opportunity title"
+                error={errors.title}
+                required
               />
 
               <Field
                 label="Opportunity Type"
                 name="type"
+                type="select"
                 value={form.type}
                 onChange={updateForm}
+                options={[
+                  "Course Project",
+                  "Research Activity",
+                  "Competition",
+                  "Volunteer Activity",
+                ]}
                 error={errors.type}
-                select
-                options={["Course Project", "Research Activity", "Competition"]}
-              />
-
-              <Field
-                label="Description"
-                name="description"
-                value={form.description}
-                onChange={updateForm}
-                error={errors.description}
-                textarea
-                placeholder="Describe the opportunity"
-              />
-
-              <Field
-                label="Goals"
-                name="goals"
-                value={form.goals}
-                onChange={updateForm}
-                error={errors.goals}
-                textarea
-                placeholder="What should the team achieve?"
+                required
               />
 
               <Field
                 label="Application Deadline"
                 name="deadline"
+                type="date"
                 value={form.deadline}
                 onChange={updateForm}
                 error={errors.deadline}
-                type="date"
+                required
               />
 
-              {form.type === "Course Project" && (
-                <>
-                  <Field
-                    label="Course Name"
-                    name="courseName"
-                    value={form.courseName}
-                    onChange={updateForm}
-                    error={errors.courseName}
-                    placeholder="Example: SWE 363"
-                  />
+              <Field
+                label="Description"
+                name="description"
+                textarea
+                value={form.description}
+                onChange={updateForm}
+                placeholder="Describe the opportunity"
+                error={errors.description}
+                required
+              />
 
-                  <Field
-                    label="Course Section"
-                    name="courseSection"
-                    value={form.courseSection}
-                    onChange={updateForm}
-                    error={errors.courseSection}
-                    placeholder="Example: 02"
-                  />
-                </>
-              )}
+              <Field
+                label="Goals"
+                name="goals"
+                textarea
+                value={form.goals}
+                onChange={updateForm}
+                placeholder="What should the team achieve?"
+                error={errors.goals}
+                required
+              />
             </div>
 
             <div className="form-actions">
+              <button className="primary-button" type="submit">
+                Continue
+              </button>
+
               <button
-                className="primary-button"
+                className="outline-button"
                 type="button"
-                onClick={() => validateStepOne() && setStep(2)}
+                onClick={saveDraft}
               >
-                Continue to Required Roles
+                Save as Draft
+              </button>
+
+              <button
+                className="text-button"
+                type="button"
+                onClick={cancelForm}
+              >
+                Cancel
               </button>
             </div>
-          </section>
-        )}
-
-        {step === 2 && (
+          </form>
+        ) : (
           <section className="opportunity-card">
-            <div className="role-form">
-              <h2>Required Roles</h2>
-              <p>Add the roles and number of members needed for your opportunity.</p>
-
-              <div className="form-grid">
-                <Field
-                  label="Role Title"
-                  name="title"
-                  value={role.title}
-                  onChange={(event) =>
-                    updateRole({
-                      target: { name: "title", value: event.target.value },
-                    })
-                  }
-                  error={errors.roleTitle}
-                  placeholder="Example: UI/UX Designer"
-                />
-
-                <Field
-                  label="Number of Members"
-                  name="members"
-                  value={role.members}
-                  onChange={updateRole}
-                  error={errors.members}
-                  type="number"
-                  placeholder="Example: 2"
-                />
-
-                <Field
-                  label="Required Skills"
-                  name="skills"
-                  value={role.skills}
-                  onChange={updateRole}
-                  error={errors.skills}
-                  textarea
-                  placeholder="Example: Figma, communication"
-                />
-
-                <Field
-                  label="Preferred Experience"
-                  name="experience"
-                  value={role.experience}
-                  onChange={updateRole}
-                  error={errors.experience}
-                  textarea
-                  placeholder="Describe preferred experience"
-                />
+            <div className="roles-header">
+              <div>
+                <h2>Required Roles</h2>
+                <p>Add the roles and skills your team needs.</p>
               </div>
+            </div>
 
-              <button className="secondary-button" type="button" onClick={addRole}>
+            <div className="role-form">
+              <Field
+                label="Role Title"
+                name="title"
+                value={role.title}
+                onChange={(event) =>
+                  updateRole({
+                    target: {
+                      name: "title",
+                      value: event.target.value,
+                    },
+                  })
+                }
+                placeholder="Example: UX Designer"
+                error={errors.roleTitle}
+                required
+              />
+
+              <Field
+                label="Required Skills"
+                name="skills"
+                textarea
+                value={role.skills}
+                onChange={(event) =>
+                  updateRole({
+                    target: {
+                      name: "skills",
+                      value: event.target.value,
+                    },
+                  })
+                }
+                placeholder="Example: Figma, research, communication"
+                error={errors.roleSkills}
+                required
+              />
+
+              <Field
+                label="Preferred Experience"
+                name="experience"
+                value={role.experience}
+                onChange={updateRole}
+                placeholder="Example: Previous project experience"
+              />
+
+              <Field
+                label="Number of Members"
+                name="members"
+                type="number"
+                value={role.members}
+                onChange={updateRole}
+                min="1"
+              />
+
+              <button className="outline-button add-role-button" type="button" onClick={addRole}>
                 <Plus size={18} />
-                Add Required Role
+                Add Role
               </button>
             </div>
 
             {roles.length > 0 && (
               <div className="roles-list">
-                <h2>Added Roles</h2>
+                <h3>Added Roles</h3>
 
                 {roles.map((item, index) => (
-                  <div className="role-item" key={`${item.title}-${index}`}>
+                  <div className="role-row" key={`${item.title}-${index}`}>
                     <div>
                       <strong>{item.title}</strong>
-                      <span>{item.members} position(s)</span>
-                      <small>{item.skills}</small>
+                      <p>{item.skills}</p>
                     </div>
 
-                    <button type="button" onClick={() => removeRole(index)}>
-                      Delete
+                    <button
+                      className="delete-role-button"
+                      type="button"
+                      onClick={() => removeRole(index)}
+                    >
+                      <Trash2 size={18} />
+                      Remove
                     </button>
                   </div>
                 ))}
               </div>
             )}
 
-            <div className="form-actions between">
-              <button className="back-button" type="button" onClick={() => setStep(1)}>
+            <div className="form-actions">
+              <button
+                className="outline-button"
+                type="button"
+                onClick={() => setStep(1)}
+              >
                 Back
               </button>
 
-              <button className="primary-button" type="button" onClick={publishOpportunity}>
+              <button
+                className="primary-button"
+                type="button"
+                onClick={publishOpportunity}
+              >
                 Publish Opportunity
               </button>
             </div>
           </section>
         )}
-
-        {showConfirm && (
-          <div className="modal-backdrop">
-            <div className="confirm-modal">
-              <h2>Publish opportunity?</h2>
-              <p>
-                Your opportunity will become visible to eligible students.
-              </p>
-
-              <div className="modal-actions">
-                <button className="primary-button" type="button" onClick={confirmPublish}>
-                  Confirm
-                </button>
-                <button
-                  className="outline-button"
-                  type="button"
-                  onClick={() => setShowConfirm(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      </section>
     </DashboardLayout>
   );
 }
@@ -376,42 +381,52 @@ function Field({
   name,
   value,
   onChange,
-  error,
-  placeholder,
+  type = "text",
   textarea = false,
   select = false,
   options = [],
-  type = "text",
+  placeholder,
+  error,
+  required = false,
+  min,
 }) {
   return (
-    <label className="form-field">
-      <span>
-        {label} <b>*</b>
-      </span>
+    <div className={`form-field ${error ? "has-error" : ""}`}>
+      <label htmlFor={name}>
+        {label} {required && <span>*</span>}
+      </label>
 
       {textarea ? (
-        <textarea name={name} value={value} onChange={onChange} placeholder={placeholder} />
-      ) : select ? (
-        <select name={name} value={value} onChange={onChange}>
-          <option value="">Select {label.toLowerCase()}</option>
+        <textarea
+          id={name}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
+      ) : select || type === "select" ? (
+        <select id={name} name={name} value={value} onChange={onChange}>
+          <option value="">Select opportunity type</option>
           {options.map((option) => (
-            <option key={option} value={option}>
+            <option value={option} key={option}>
               {option}
             </option>
           ))}
         </select>
       ) : (
         <input
+          id={name}
           name={name}
           type={type}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          min={min}
         />
       )}
 
-      {error && <small className="field-error">{error}</small>}
-    </label>
+      {error && <small>{error}</small>}
+    </div>
   );
 }
 
