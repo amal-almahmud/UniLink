@@ -1,6 +1,6 @@
 .dashboard-layout {
   min-height: 100vh;
-  background-color: var(--background);
+  background: #f4f6fa;
 }
 
 .dashboard-main {
@@ -10,11 +10,15 @@
 }
 
 .dashboard-content {
-  width: 100%;
-  min-height: calc(100vh - 82px);
-  padding: 36px 40px;
+  min-height: calc(100vh - 96px);
+  padding: 32px 40px;
+  background: #f4f6fa;
+}
 
-  background-color: var(--background);
+.dashboard-page-container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 @media (max-width: 900px) {
@@ -23,13 +27,6 @@
   }
 
   .dashboard-content {
-    min-height: calc(100vh - 72px);
-    padding: 28px 24px;
-  }
-}
-
-@media (max-width: 600px) {
-  .dashboard-content {
-    padding: 22px 16px;
+    padding: 24px 18px;
   }
 }

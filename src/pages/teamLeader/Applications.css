@@ -1,0 +1,155 @@
+.applications-page {
+  width: 100%;
+}
+
+.applications-heading {
+  margin-bottom: 38px;
+}
+
+.applications-heading h1,
+.my-team-heading h1 {
+  margin: 0 0 12px;
+  color: #10294b;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.applications-heading p,
+.my-team-heading p {
+  margin: 0;
+  color: #718097;
+  font-size: 18px;
+}
+
+.application-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 500px;
+  margin-bottom: 28px;
+}
+
+.application-field label {
+  color: #38465b;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.application-field select {
+  height: 58px;
+  padding: 0 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #38465b;
+  font-size: 17px;
+}
+
+.application-tabs {
+  display: flex;
+  gap: 36px;
+  border-bottom: 1px solid #ccd6e2;
+  margin-bottom: 20px;
+}
+
+.application-tabs button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 16px 4px;
+  background: transparent;
+  color: #718097;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.application-tabs button.active {
+  border-bottom-color: #10294b;
+  color: #10294b;
+}
+
+.applications-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #d5dfeb;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.applications-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.applications-table th,
+.applications-table td {
+  padding: 22px 18px;
+  border-bottom: 1px solid #e5ebf2;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.applications-table th {
+  color: #718097;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.applications-table td {
+  color: #40516a;
+  font-size: 16px;
+}
+
+.application-status {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.application-status-pending {
+  background: #fff0bf;
+  color: #a15b00;
+}
+
+.application-status-accepted {
+  background: #d9f6e5;
+  color: #198044;
+}
+
+.application-status-rejected {
+  background: #ffe0e0;
+  color: #d62828;
+}
+
+.application-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.application-actions button {
+  border: 0;
+  background: transparent;
+  color: #164d82;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.application-actions .accept-button {
+  padding: 11px 15px;
+  border-radius: 8px;
+  background: #10294b;
+  color: #ffffff;
+}
+
+.application-actions .reject-button {
+  color: #ef2b2d;
+}
+
+.empty-applications {
+  padding: 40px !important;
+  color: #718097 !important;
+  text-align: center !important;
+}

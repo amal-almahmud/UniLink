@@ -6,24 +6,21 @@ import "./DashboardLayout.css";
 function DashboardLayout({
   children,
   sidebarItems = [],
-  activeArea = "Find a Team",
-  onAreaChange,
-  studentName = "Student Name",
+  activeArea = "Manage a Team",
+  studentName = "[Student Name]",
 }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    return (
+  return (
     <div className="dashboard-layout">
       <Sidebar
         items={sidebarItems}
         activeArea={activeArea}
-        onAreaChange={onAreaChange}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
-     <div className="dashboard-main">
+      <div className="dashboard-main">
         <Navbar
           studentName={studentName}
           studentRole="KFUPM Student"
@@ -32,7 +29,9 @@ function DashboardLayout({
         />
 
         <main className="dashboard-content">
-          {children}
+          <div className="dashboard-page-container">
+            {children}
+          </div>
         </main>
       </div>
     </div>
@@ -40,4 +39,3 @@ function DashboardLayout({
 }
 
 export default DashboardLayout;
-   

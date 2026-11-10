@@ -1,0 +1,184 @@
+.applicant-profile-page {
+  width: 100%;
+  color: #10294b;
+}
+
+.profile-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  color: #718097;
+  font-size: 16px;
+}
+
+.profile-breadcrumb button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #164d82;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.page-heading {
+  margin-bottom: 36px;
+}
+
+.page-heading h1 {
+  margin: 0 0 12px;
+  color: #10294b;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #718097;
+  font-size: 19px;
+}
+
+.applicant-profile-card {
+  padding: 30px;
+  border: 1px solid #d5dfeb;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.applicant-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.applicant-identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.applicant-avatar {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e8f1fb;
+  color: #10294b;
+}
+
+.applicant-identity h2 {
+  margin: 0 0 8px;
+  color: #10294b;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.applicant-identity p {
+  margin: 0;
+  color: #718097;
+  font-size: 17px;
+}
+
+.applicant-profile-divider {
+  height: 1px;
+  margin: 26px 0 30px;
+  background: #e5ebf2;
+}
+
+.applicant-information-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 80px;
+}
+
+.applicant-information-item h3 {
+  margin: 0 0 12px;
+  color: #10294b;
+  font-size: 17px;
+}
+
+.applicant-information-item p {
+  margin: 0;
+  color: #4f5e73;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.applicant-profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 38px;
+}
+
+.primary-button,
+.outline-button,
+.reject-button {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button {
+  border: 1px solid #10294b;
+  background: #10294b;
+  color: #ffffff;
+}
+
+.outline-button {
+  border: 1px solid #10294b;
+  background: #ffffff;
+  color: #10294b;
+}
+
+.reject-button {
+  border: 0;
+  background: transparent;
+  color: #ef2b2d;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.status-pending {
+  background: #fff0bf;
+  color: #a15b00;
+}
+
+@media (max-width: 700px) {
+  .page-heading h1 {
+    font-size: 32px;
+  }
+
+  .applicant-profile-card {
+    padding: 20px;
+  }
+
+  .applicant-profile-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .applicant-information-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .applicant-profile-actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

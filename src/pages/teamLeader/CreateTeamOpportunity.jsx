@@ -1,28 +1,14 @@
-
 import { useState } from "react";
-import {
-  Plus,
-  Trash2,
-  LayoutDashboard,
-  FilePlus2,
-  Files,
-  UsersRound,
-  Send,
-} from "lucide-react";
+import { useNavigate } from "react-router";
+import { Plus, Trash2 } from "lucide-react";
+
 import DashboardLayout from "../../layouts/DashboardLayout";
+import teamLeaderSidebarItems from "./teamLeaderSidebarItems";
 import "./CreateTeamOpportunity.css";
 
-const sidebarItems = [
-  { label: "Create Team Opportunity", to: "/team-leader/create", icon: FilePlus2 },
-  { label: "My Opportunities", to: "/team-leader/opportunities", icon: Files },
-  { label: "Applications Management", to: "/team-leader/applications", icon: UsersRound },
-  { label: "My Team", to: "/team-leader/team", icon: UsersRound },
-  { label: "Team Updates", to: "/team-leader/updates", icon: Send },
-];
-
-const initialForm = {
+const initialOpportunity = {
   title: "",
-  type: "",
+  opportunityType: "",
   deadline: "",
   description: "",
   goals: "",
@@ -32,29 +18,28 @@ const initialRole = {
   title: "",
   skills: "",
   experience: "",
-  members: "1",
+  members: 1,
 };
 
 function CreateTeamOpportunity() {
+  const navigate = useNavigate();
+
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState(initialForm);
-  const [roles, setRoles] = useState([]);
+  const [opportunity, setOpportunity] =
+    useState(initialOpportunity);
   const [role, setRole] = useState(initialRole);
-  const [errors, setErrors] = useState({});
+  const [roles, setRoles] = useState([]);
   const [message, setMessage] = useState("");
 
-  const updateForm = (event) => {
+  const updateOpportunity = (event) => {
     const { name, value } = event.target;
 
-    setForm((current) => ({
+    setOpportunity((current) => ({
       ...current,
       [name]: value,
     }));
 
-    setErrors((current) => ({
-      ...current,
-      [name]: "",
-    }));
+    setMessage("");
   };
 
   const updateRole = (event) => {
@@ -64,182 +49,205 @@ function CreateTeamOpportunity() {
       ...current,
       [name]: value,
     }));
+
+    setMessage("");
   };
 
-  const validateStepOne = () => {
-    const nextErrors = {};
+  const isOpportunityValid =
+    opportunity.title.trim() &&
+    opportunity.opportunityType &&
+    opportunity.deadline &&
+    opportunity.description.trim() &&
+    opportunity.goals.trim();
 
-    if (!form.title.trim()) nextErrors.title = "Title is required.";
-    if (!form.type) nextErrors.type = "Opportunity type is required.";
-    if (!form.deadline) nextErrors.deadline = "Application deadline is required.";
-    if (!form.description.trim()) {
-      nextErrors.description = "Description is required.";
-    }
-    if (!form.goals.trim()) nextErrors.goals = "Goals are required.";
-
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
-  };
-
-  const validateRole = () => {
-    const nextErrors = {};
-
-    if (!role.title.trim()) nextErrors.roleTitle = "Role title is required.";
-    if (!role.skills.trim()) nextErrors.roleSkills = "Required skills are required.";
-
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
-  };
-
-  const continueToRoles = (event) => {
-    event.preventDefault();
-
-    if (!validateStepOne()) {
-      setMessage("Please complete the required fields.");
+  const goToRoles = () => {
+    if (!isOpportunityValid) {
+      setMessage("Please complete all required fields.");
       return;
     }
 
     setMessage("");
     setStep(2);
-  };
-
-  const addRole = () => {
-    if (!validateRole()) return;
-
-    setRoles((current) => [...current, role]);
-    setRole(initialRole);
-    setErrors({});
-  };
-
-  const removeRole = (index) => {
-    setRoles((current) => current.filter((_, itemIndex) => itemIndex !== index));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const saveDraft = () => {
-    const hasInformation = Object.values(form).some((value) => value.trim());
-
-    if (!hasInformation) {
-      setMessage("Please enter some information before saving the draft.");
+    if (!opportunity.title.trim()) {
+      setMessage("Enter an opportunity title first.");
       return;
     }
 
     setMessage("Draft saved successfully.");
   };
-const publishOpportunity = () => {
-  if (roles.length === 0) {
-    setMessage("Add at least one required role before publishing.");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    return;
-  }
 
-  setMessage("Opportunity published successfully.");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+  const addRole = () => {
+    if (!role.title.trim() || !role.skills.trim()) {
+      setMessage(
+        "Enter a role title and required skills."
+      );
+      return;
+    }
 
-  const cancelForm = () => {
-    setForm(initialForm);
-    setRoles([]);
+    setRoles((current) => [
+      ...current,
+      {
+        id: Date.now(),
+        ...role,
+      },
+    ]);
+
     setRole(initialRole);
-    setErrors({});
-    setMessage("");
-    setStep(1);
+    setMessage("Role added successfully.");
+  };
+
+  const publishOpportunity = () => {
+    if (roles.length === 0) {
+      setMessage(
+        "Add at least one role before publishing."
+      );
+      return;
+    }
+
+    navigate("/my-opportunities");
   };
 
   return (
     <DashboardLayout
-      sidebarItems={sidebarItems}
+      sidebarItems={teamLeaderSidebarItems}
       activeArea="Manage a Team"
       studentName="[Student Name]"
     >
       <section className="team-opportunity-page">
-        <header className="page-heading">
-          <h1>Create Team Opportunity</h1>
-          <p>
-            Step {step} of 2 ·{" "}
-            {step === 1 ? "Opportunity Information" : "Required Roles"}
-          </p>
+        <header className="opportunity-page-heading">
+          <div>
+            <h1>Create Team Opportunity</h1>
+            <p>
+              Create an opportunity and find suitable students
+              for your team.
+            </p>
+          </div>
+
+          <button
+            className="outline-button"
+            type="button"
+            onClick={saveDraft}
+          >
+            Save as Draft
+          </button>
         </header>
 
         <div className="opportunity-stepper">
-          <div className={`stepper-item ${step >= 1 ? "active" : ""}`}>
-            <span>1</span>
-            <strong>Opportunity Information</strong>
-          </div>
+          <button
+            type="button"
+            className={step === 1 ? "step-active" : ""}
+            onClick={() => setStep(1)}
+          >
+            <b>1</b>
+            Opportunity Details
+          </button>
 
-          <div className="stepper-line" />
-
-          <div className={`stepper-item ${step === 2 ? "active" : ""}`}>
-            <span>2</span>
-            <strong>Required Roles</strong>
-          </div>
+          <button
+            type="button"
+            className={step === 2 ? "step-active" : ""}
+            onClick={() => {
+              if (isOpportunityValid) {
+                setStep(2);
+              } else {
+                setMessage(
+                  "Complete the opportunity details first."
+                );
+              }
+            }}
+          >
+            <b>2</b>
+            Required Roles
+          </button>
         </div>
 
-        {message && <div className="form-message">{message}</div>}
+        {message && (
+          <div className="form-message">{message}</div>
+        )}
 
-        {step === 1 ? (
-          <form className="opportunity-card" onSubmit={continueToRoles}>
+        {step === 1 && (
+          <div className="opportunity-form-card">
             <div className="form-grid">
-              <Field
-                label="Title"
-                name="title"
-                value={form.title}
-                onChange={updateForm}
-                placeholder="Enter opportunity title"
-                error={errors.title}
-                required
-              />
+              <label>
+                Title *
+                <input
+                  name="title"
+                  value={opportunity.title}
+                  onChange={updateOpportunity}
+                  placeholder="Enter opportunity title"
+                />
+              </label>
 
-              <Field
-                label="Opportunity Type"
-                name="type"
-                type="select"
-                value={form.type}
-                onChange={updateForm}
-                options={[
-                  "Course Project",
-                  "Research Activity",
-                  "Competition",
-                  "Volunteer Activity",
-                ]}
-                error={errors.type}
-                required
-              />
+              <label>
+                Opportunity Type *
+                <select
+                  name="opportunityType"
+                  value={opportunity.opportunityType}
+                  onChange={updateOpportunity}
+                >
+                  <option value="">
+                    Select opportunity type
+                  </option>
+                  <option value="Course Project">
+                    Course Project
+                  </option>
+                  <option value="Research Activity">
+                    Research Activity
+                  </option>
+                  <option value="Competition">
+                    Competition
+                  </option>
+                  <option value="Hackathon">
+                    Hackathon
+                  </option>
+                  <option value="University Initiative">
+                    University Initiative
+                  </option>
+                </select>
+              </label>
 
-              <Field
-                label="Application Deadline"
-                name="deadline"
-                type="date"
-                value={form.deadline}
-                onChange={updateForm}
-                error={errors.deadline}
-                required
-              />
+              <label>
+                Application Deadline *
+                <input
+                  type="date"
+                  name="deadline"
+                  value={opportunity.deadline}
+                  onChange={updateOpportunity}
+                />
+              </label>
 
-              <Field
-                label="Description"
-                name="description"
-                textarea
-                value={form.description}
-                onChange={updateForm}
-                placeholder="Describe the opportunity"
-                error={errors.description}
-                required
-              />
+              <label>
+                Description *
+                <textarea
+                  name="description"
+                  value={opportunity.description}
+                  onChange={updateOpportunity}
+                  placeholder="Describe the opportunity"
+                  rows="5"
+                />
+              </label>
 
-              <Field
-                label="Goals"
-                name="goals"
-                textarea
-                value={form.goals}
-                onChange={updateForm}
-                placeholder="What should the team achieve?"
-                error={errors.goals}
-                required
-              />
+              <label>
+                Goals *
+                <textarea
+                  name="goals"
+                  value={opportunity.goals}
+                  onChange={updateOpportunity}
+                  placeholder="What should the team achieve?"
+                  rows="5"
+                />
+              </label>
             </div>
 
             <div className="form-actions">
-              <button className="primary-button" type="submit">
+              <button
+                className="primary-button"
+                type="button"
+                onClick={goToRoles}
+              >
                 Continue
               </button>
 
@@ -254,103 +262,103 @@ const publishOpportunity = () => {
               <button
                 className="text-button"
                 type="button"
-                onClick={cancelForm}
+                onClick={() =>
+                  navigate("/my-opportunities")
+                }
               >
                 Cancel
               </button>
             </div>
-          </form>
-        ) : (
-          <section className="opportunity-card">
-            <div className="roles-header">
-              <div>
-                <h2>Required Roles</h2>
-                <p>Add the roles and skills your team needs.</p>
-              </div>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="roles-form-card">
+            <h2>Add the roles and skills your team needs.</h2>
+
+            <div className="form-grid">
+              <label>
+                Role Title *
+                <input
+                  name="title"
+                  value={role.title}
+                  onChange={updateRole}
+                  placeholder="e.g. UX Designer"
+                />
+              </label>
+
+              <label>
+                Required Skills *
+                <textarea
+                  name="skills"
+                  value={role.skills}
+                  onChange={updateRole}
+                  placeholder="Figma, user research, communication"
+                  rows="4"
+                />
+              </label>
+
+              <label>
+                Preferred Experience
+                <input
+                  name="experience"
+                  value={role.experience}
+                  onChange={updateRole}
+                  placeholder="Previous project experience"
+                />
+              </label>
+
+              <label>
+                Number of Members
+                <input
+                  type="number"
+                  min="1"
+                  name="members"
+                  value={role.members}
+                  onChange={updateRole}
+                />
+              </label>
             </div>
 
-            <div className="role-form">
-              <Field
-                label="Role Title"
-                name="title"
-                value={role.title}
-                onChange={(event) =>
-                  updateRole({
-                    target: {
-                      name: "title",
-                      value: event.target.value,
-                    },
-                  })
-                }
-                placeholder="Example: UX Designer"
-                error={errors.roleTitle}
-                required
-              />
+            <button
+              className="outline-button"
+              type="button"
+              onClick={addRole}
+            >
+              <Plus size={18} />
+              Add Role
+            </button>
 
-              <Field
-                label="Required Skills"
-                name="skills"
-                textarea
-                value={role.skills}
-                onChange={(event) =>
-                  updateRole({
-                    target: {
-                      name: "skills",
-                      value: event.target.value,
-                    },
-                  })
-                }
-                placeholder="Example: Figma, research, communication"
-                error={errors.roleSkills}
-                required
-              />
-
-              <Field
-                label="Preferred Experience"
-                name="experience"
-                value={role.experience}
-                onChange={updateRole}
-                placeholder="Example: Previous project experience"
-              />
-
-              <Field
-                label="Number of Members"
-                name="members"
-                type="number"
-                value={role.members}
-                onChange={updateRole}
-                min="1"
-              />
-
-              <button className="outline-button add-role-button" type="button" onClick={addRole}>
-                <Plus size={18} />
-                Add Role
-              </button>
-            </div>
-
-            {roles.length > 0 && (
-              <div className="roles-list">
-                <h3>Added Roles</h3>
-
-                {roles.map((item, index) => (
-                  <div className="role-row" key={`${item.title}-${index}`}>
-                    <div>
-                      <strong>{item.title}</strong>
-                      <p>{item.skills}</p>
-                    </div>
-
-                    <button
-                      className="delete-role-button"
-                      type="button"
-                      onClick={() => removeRole(index)}
-                    >
-                      <Trash2 size={18} />
-                      Remove
-                    </button>
+            <div className="added-roles-list">
+              {roles.map((item) => (
+                <div className="added-role" key={item.id}>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.skills}</p>
+                    <small>
+                      {item.members} member
+                      {item.members > 1 ? "s" : ""}
+                    </small>
                   </div>
-                ))}
-              </div>
-            )}
+
+                  <button
+                    className="danger-action"
+                    type="button"
+                    onClick={() =>
+                      setRoles((current) =>
+                        current.filter(
+                          (roleItem) =>
+                            roleItem.id !== item.id
+                        )
+                      )
+                    }
+                  >
+                    <Trash2 size={16} />
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
 
             <div className="form-actions">
               <button
@@ -368,65 +376,21 @@ const publishOpportunity = () => {
               >
                 Publish Opportunity
               </button>
+
+              <button
+                className="text-button"
+                type="button"
+                onClick={() =>
+                  navigate("/my-opportunities")
+                }
+              >
+                Cancel
+              </button>
             </div>
-          </section>
+          </div>
         )}
       </section>
     </DashboardLayout>
-  );
-}
-
-function Field({
-  label,
-  name,
-  value,
-  onChange,
-  type = "text",
-  textarea = false,
-  select = false,
-  options = [],
-  placeholder,
-  error,
-  required = false,
-  min,
-}) {
-  return (
-    <div className={`form-field ${error ? "has-error" : ""}`}>
-      <label htmlFor={name}>
-        {label} {required && <span>*</span>}
-      </label>
-
-      {textarea ? (
-        <textarea
-          id={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
-      ) : select || type === "select" ? (
-        <select id={name} name={name} value={value} onChange={onChange}>
-          <option value="">Select opportunity type</option>
-          {options.map((option) => (
-            <option value={option} key={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      ) : (
-        <input
-          id={name}
-          name={name}
-          type={type}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          min={min}
-        />
-      )}
-
-      {error && <small>{error}</small>}
-    </div>
   );
 }
 
