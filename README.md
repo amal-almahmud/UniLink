@@ -1,16 +1,119 @@
-# React + Vite
+# UniLink
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## About UniLink
+UniLink is a platform designed to connect KFUPM students with university opportunities and suitable teammates. Students can explore and save opportunities, find or create teams, and track their applications and invitations in one organized place. It also enables team leaders to manage members and applications, while authorized publishers can share academic, research, and extracurricular opportunities with students.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Phase 4: Frontend Development
 
-## React Compiler
+Phase 4 focuses on implementing the user interface using React. The current version uses sample data for demonstrating the interface and interactions. Backend and database integration are not included in this phase.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- User registration and login
+- Forgot and reset password pages
+- Student dashboard
+- Notifications
+- Student profile and settings
+- Browse and save opportunities
+- Find or create a team
+- Manage team applications and members
+- Publish university opportunities
+- Responsive interface for different screen sizes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- React
+- Vite
+- JavaScript
+- CSS
+- React Router
+- Lucide React
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone YOUR_REPOSITORY_URL
+```
+
+2. Open the project directory:
+
+```bash
+cd UniLink
+```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+5. Open the local URL displayed in the terminal.
+
+## Production Build
+
+To verify that the project builds successfully:
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+```text
+UniLink/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   └── common/
+│   ├── layouts/
+│   ├── pages/
+│   │   ├── auth/
+│   │   ├── opportunityPublisher/
+│   │   ├── shared/
+│   │   ├── teamLeader/
+│   │   └── teamSeeker/
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+└── README.md
+```
+
+
+## Testing
+
+The frontend was tested by:
+
+- Running the Vite development server
+- Opening and reviewing all available pages
+- Testing navigation links and buttons
+- Checking the browser console for errors
+- Running the production build command
+
+## Team Members
+
+- Amal Almahmud
+- Daniah Aljufri
+- Sara Almulhim
+- Sara Almugbel
+
+
+## Notes
+
+- This repository currently contains the Phase 4 frontend implementation.
+- The application uses sample data until backend integration is completed.
+- Some features may be represented as interactive frontend prototypes.

@@ -1,249 +1,364 @@
+import { useState } from "react";
 import {
   Search,
-  Users,
+  UsersRound,
   Send,
   FileText,
   Bookmark,
+  Compass,
+  UserSearch,
+  Plus,
   CalendarDays,
-  ArrowRight,
+  ChevronRight,
 } from "lucide-react";
-
-import { useNavigate } from "react-router";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import "./Dashboard.css";
 
-function Dashboard({
-  sidebarItems = [],
-  activeArea = "",
-  studentName = "[Student Name]",
-}) {
-  const navigate = useNavigate();
+const sidebarItemsByArea = {
+  "Find a Team": [
+    {
+      label: "Browse Opportunities",
+      to: "/opportunities",
+      icon: Compass,
+    },
+    {
+      label: "Saved Opportunities",
+      to: "/saved-opportunities",
+      icon: Bookmark,
+    },
+    {
+      label: "Find a Team",
+      to: "/find-team",
+      icon: UsersRound,
+    },
+    {
+      label: "Looking for a Team",
+      to: "/looking-for-team",
+      icon: Search,
+    },
+    {
+      label: "My Applications and Invitations",
+      to: "/applications",
+      icon: FileText,
+    },
+  ],
+
+  "Manage a Team": [
+    {
+      label: "Create Team Opportunity",
+      to: "/create-team-opportunity",
+      icon: Plus,
+    },
+    {
+      label: "My Opportunities",
+      to: "/my-opportunities",
+      icon: FileText,
+    },
+    {
+      label: "Applications Management",
+      to: "/applications-management",
+      icon: UsersRound,
+    },
+    {
+      label: "My Team",
+      to: "/my-team",
+      icon: UserSearch,
+    },
+    {
+      label: "Team Updates",
+      to: "/team-updates",
+      icon: Send,
+    },
+  ],
+
+  "Publish an Opportunity": [
+    {
+      label: "Browse Opportunities",
+      to: "/opportunities",
+      icon: Compass,
+    },
+    {
+      label: "Check Existing Opportunities",
+      to: "/existing-opportunities",
+      icon: Search,
+    },
+    {
+      label: "Post University Opportunity",
+      to: "/publish-opportunity",
+      icon: Plus,
+    },
+    {
+      label: "My Posted Opportunities",
+      to: "/posted-opportunities",
+      icon: FileText,
+    },
+  ],
+};
+
+const actionCards = [
+  {
+    title: "Find a Team",
+    description: "Browse open student teams",
+    icon: Search,
+  },
+  {
+    title: "Manage a Team",
+    description: "Lead opportunities and members",
+    icon: UsersRound,
+  },
+  {
+    title: "Publish an Opportunity",
+    description: "Share an official announcement",
+    icon: Send,
+  },
+];
+
+const statCards = [
+  {
+    value: 2,
+    label: "Active applications",
+    icon: FileText,
+  },
+  {
+    value: 2,
+    label: "Saved opportunities",
+    icon: Bookmark,
+  },
+  {
+    value: 2,
+    label: "Open team opportunities",
+    icon: UsersRound,
+  },
+  {
+    value: 1,
+    label: "Published opportunity",
+    icon: Send,
+  },
+];
+
+const opportunities = [
+  {
+    type: "Course Project",
+    title: "AI-Based Smart Campus Assistant",
+    description:
+      "Design an intelligent assistant that helps KFUPM students navigate campus services and academic resources.",
+    deadline: "30 Apr 2026",
+  },
+  {
+    type: "Research Activity",
+    title: "Machine Learning for Student Success",
+    description:
+      "Explore responsible machine learning models that identify patterns in student learning and engagement.",
+    deadline: "12 May 2026",
+  },
+];
+
+function Dashboard({ userName = "Student Name" }) {
+  const [activeArea, setActiveArea] = useState("Find a Team");
+  const firstName = userName.split(" ")[0];
+
+  const sidebarItems = sidebarItemsByArea[activeArea];
 
   return (
     <DashboardLayout
       sidebarItems={sidebarItems}
       activeArea={activeArea}
-      studentName={studentName}
+      onAreaChange={setActiveArea}
+      studentName={userName}
     >
       <section className="dashboard-page">
         <header className="dashboard-heading">
-          <h1>Welcome, {studentName}</h1>
-
+          <h1>Welcome, {firstName}</h1>
           <p>
-            Here is what is happening across your UniLink
-            account.
+            Here is what is happening across your UniLink account.
           </p>
         </header>
 
-        <div className="dashboard-quick-links">
-          <button
-            className="dashboard-quick-card"
-            type="button"
-            onClick={() => navigate("/my-team")}
-          >
-            <Users size={28} />
+        <section className="dashboard-actions">
+          {actionCards.map((action) => {
+            const Icon = action.icon;
 
-            <div>
-              <h2>Manage a Team</h2>
-              <p>Lead opportunities and members</p>
-            </div>
+            return (
+              <button
+                key={action.title}
+                className="dashboard-action-card"
+                type="button"
+                onClick={() => setActiveArea(action.title)}
+              >
+                <Icon className="dashboard-action-icon" size={25} />
 
-            <ArrowRight size={22} />
-          </button>
+                <span className="dashboard-action-text">
+                  <strong>{action.title}</strong>
+                  <small>{action.description}</small>
+                </span>
 
-          <button
-            className="dashboard-quick-card"
-            type="button"
-            onClick={() =>
-              navigate("/create-team-opportunity")
-            }
-          >
-            <Send size={28} />
+                <ChevronRight size={22} />
+              </button>
+            );
+          })}
+        </section>
 
-            <div>
-              <h2>Publish an Opportunity</h2>
-              <p>Share an opportunity with students</p>
-            </div>
+        <section className="dashboard-stats">
+          {statCards.map((stat) => {
+            const Icon = stat.icon;
 
-            <ArrowRight size={22} />
-          </button>
+            return (
+              <article className="dashboard-stat-card" key={stat.label}>
+                <span className="dashboard-stat-icon">
+                  <Icon size={23} />
+                </span>
 
-          <button
-            className="dashboard-quick-card"
-            type="button"
-            onClick={() =>
-              navigate("/applications-management")
-            }
-          >
-            <Search size={28} />
+                <div>
+                  <strong>{stat.value}</strong>
+                  <p>{stat.label}</p>
+                </div>
 
-            <div>
-              <h2>Applications Management</h2>
-              <p>Review student applications</p>
-            </div>
+                {stat.label === "Saved opportunities" && (
+                  <ChevronRight
+                    className="dashboard-stat-arrow"
+                    size={20}
+                  />
+                )}
+              </article>
+            );
+          })}
+        </section>
 
-            <ArrowRight size={22} />
-          </button>
-        </div>
+        <p className="dashboard-note">
+          Saved count opens Saved Opportunities.
+        </p>
 
-        <div className="dashboard-statistics">
-          <div className="dashboard-stat-card">
-            <div className="dashboard-stat-icon">
-              <FileText size={24} />
-            </div>
-
-            <div className="dashboard-stat-content">
-              <strong>2</strong>
-              <span>Active applications</span>
-            </div>
-          </div>
-
-          <div className="dashboard-stat-card">
-            <div className="dashboard-stat-icon">
-              <Bookmark size={24} />
-            </div>
-
-            <div className="dashboard-stat-content">
-              <strong>2</strong>
-              <span>Saved opportunities</span>
-            </div>
-          </div>
-
-          <div className="dashboard-stat-card">
-            <div className="dashboard-stat-icon">
-              <Users size={24} />
-            </div>
-
-            <div className="dashboard-stat-content">
-              <strong>2</strong>
-              <span>Open team opportunities</span>
-            </div>
-          </div>
-
-          <div className="dashboard-stat-card">
-            <div className="dashboard-stat-icon">
-              <Send size={24} />
-            </div>
-
-            <div className="dashboard-stat-content">
-              <strong>1</strong>
-              <span>Published opportunity</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="dashboard-columns">
-          <section className="dashboard-section">
-            <div className="dashboard-section-heading">
+        <section className="dashboard-main-grid">
+          <article className="dashboard-panel">
+            <div className="dashboard-panel-heading">
               <h2>Recommended Opportunities</h2>
-
-              <button
-                type="button"
-                onClick={() =>
-                  navigate("/my-opportunities")
-                }
-              >
-                View all
-              </button>
+              <a href="/opportunities">View all</a>
             </div>
 
-            <div className="dashboard-opportunity-list">
-              <button
-                className="dashboard-opportunity-card"
-                type="button"
-                onClick={() =>
-                  navigate("/my-opportunities")
-                }
-              >
-                <div className="dashboard-opportunity-icon">
-                  <Search size={24} />
-                </div>
-
-                <div className="dashboard-opportunity-content">
-                  <span className="dashboard-opportunity-type">
-                    Course Project
+            <div className="dashboard-opportunities">
+              {opportunities.map((opportunity) => (
+                <a
+                  className="dashboard-opportunity"
+                  href="/opportunity-details"
+                  key={opportunity.title}
+                >
+                  <span className="dashboard-opportunity-icon">
+                    <Compass size={22} />
                   </span>
 
-                  <h3>
-                    AI-Based Smart Campus Assistant
-                  </h3>
+                  <div className="dashboard-opportunity-content">
+                    <span className="dashboard-tag">
+                      {opportunity.type}
+                    </span>
 
-                  <p>
-                    Design an intelligent assistant that
-                    helps KFUPM students navigate campus
-                    services and academic resources.
-                  </p>
+                    <h3>{opportunity.title}</h3>
+                    <p>{opportunity.description}</p>
 
-                  <span className="dashboard-deadline">
-                    <CalendarDays size={17} />
-                    Deadline 30 Apr 2026
-                  </span>
-                </div>
+                    <span className="dashboard-deadline-text">
+                      <CalendarDays size={18} />
+                      Deadline {opportunity.deadline}
+                    </span>
+                  </div>
 
-                <ArrowRight size={22} />
-              </button>
-
-              <button
-                className="dashboard-opportunity-card"
-                type="button"
-                onClick={() =>
-                  navigate("/my-opportunities")
-                }
-              >
-                <div className="dashboard-opportunity-icon">
-                  <Search size={24} />
-                </div>
-
-                <div className="dashboard-opportunity-content">
-                  <span className="dashboard-opportunity-type">
-                    Research Activity
-                  </span>
-
-                  <h3>
-                    Machine Learning for Student Success
-                  </h3>
-
-                  <p>
-                    Explore responsible machine learning
-                    models that identify patterns in
-                    student learning and engagement.
-                  </p>
-
-                  <span className="dashboard-deadline">
-                    <CalendarDays size={17} />
-                    Deadline 12 May 2026
-                  </span>
-                </div>
-
-                <ArrowRight size={22} />
-              </button>
+                  <ChevronRight
+                    className="dashboard-opportunity-arrow"
+                    size={21}
+                  />
+                </a>
+              ))}
             </div>
-          </section>
 
-          <section className="dashboard-section dashboard-deadlines">
-            <h2>Upcoming Deadlines</h2>
+            <p className="dashboard-note dashboard-panel-note">
+              Clickable card opens opportunity details.
+            </p>
+          </article>
 
-            <div className="dashboard-deadline-item">
-              <strong>30</strong>
-              <span>APR</span>
+          <article className="dashboard-panel">
+            <div className="dashboard-panel-heading">
+              <h2>Upcoming Deadlines</h2>
+            </div>
+
+            <div className="dashboard-deadlines">
+              <div className="dashboard-deadline">
+                <div className="dashboard-date">
+                  <strong>30</strong>
+                  <span>APR</span>
+                </div>
+
+                <div>
+                  <h3>Smart Campus application</h3>
+                  <p>8 days remaining</p>
+                </div>
+              </div>
+
+              <div className="dashboard-deadline">
+                <div className="dashboard-date">
+                  <strong>12</strong>
+                  <span>MAY</span>
+                </div>
+
+                <div>
+                  <h3>Research registration</h3>
+                  <p>20 days remaining</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article className="dashboard-panel">
+            <div className="dashboard-panel-heading">
+              <h2>Recent Applications</h2>
+              <a href="/applications">View all</a>
+            </div>
+
+            <div className="dashboard-list-row">
+              <div>
+                <h3>Campus Innovators</h3>
+                <p>UX Designer · 18 Apr</p>
+              </div>
+
+              <span className="dashboard-status dashboard-status--pending">
+                Pending
+              </span>
+            </div>
+
+            <div className="dashboard-list-row">
+              <div>
+                <h3>Green AI Team</h3>
+                <p>Researcher · 14 Apr</p>
+              </div>
+
+              <span className="dashboard-status dashboard-status--accepted">
+                Accepted
+              </span>
+            </div>
+          </article>
+
+          <article className="dashboard-panel">
+            <div className="dashboard-panel-heading">
+              <h2>Recent Notifications</h2>
+              <a href="/notifications">View all</a>
+            </div>
+
+            <div className="dashboard-notification">
+              <span className="dashboard-notification-dot dashboard-notification-dot--new" />
 
               <div>
-                <h3>Smart Campus application</h3>
-                <small>8 days remaining</small>
+                <h3>Your application was accepted</h3>
+                <p>Green AI Team · 2 hours ago</p>
               </div>
             </div>
 
-            <div className="dashboard-deadline-item">
-              <strong>12</strong>
-              <span>MAY</span>
+            <div className="dashboard-notification">
+              <span className="dashboard-notification-dot" />
 
               <div>
-                <h3>Research registration</h3>
-                <small>20 days remaining</small>
+                <h3>New team progress update</h3>
+                <p>Campus Innovators · Yesterday</p>
               </div>
             </div>
-          </section>
-        </div>
+          </article>
+        </section>
       </section>
     </DashboardLayout>
   );
