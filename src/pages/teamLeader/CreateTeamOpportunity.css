@@ -1,0 +1,178 @@
+.team-opportunity-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.opportunity-page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.opportunity-page-heading h1 {
+  margin: 0 0 10px;
+  color: #10294b;
+  font-size: 40px;
+}
+
+.opportunity-page-heading p {
+  margin: 0;
+  color: #718097;
+  font-size: 18px;
+}
+
+.opportunity-stepper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.opportunity-stepper button {
+  padding: 12px 16px;
+  border-radius: 9px;
+  background: transparent;
+  color: #718097;
+  font-weight: 700;
+}
+
+.opportunity-stepper button b {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #e8edf4;
+}
+
+.opportunity-stepper .step-active {
+  background: #e8f1fb;
+  color: #153f6c;
+}
+
+.opportunity-stepper .step-active b {
+  background: #153f6c;
+  color: #ffffff;
+}
+
+.form-message {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 9px;
+  background: #e8f5ed;
+  color: #166b3a;
+}
+
+.opportunity-form-card,
+.roles-form-card {
+  padding: 32px;
+  border: 1px solid #dce3ec;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.roles-form-card h2 {
+  margin: 0 0 24px;
+  color: #10294b;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 28px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #34435a;
+  font-weight: 700;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cbd6e2;
+  border-radius: 9px;
+  background: #fbfcfe;
+  color: #243852;
+}
+
+.form-grid textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.added-roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.added-role {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px;
+  border: 1px solid #dce3ec;
+  border-radius: 10px;
+}
+
+.added-role h3 {
+  margin: 0;
+  color: #10294b;
+}
+
+.added-role p {
+  margin: 7px 0;
+  color: #66758a;
+}
+
+.danger-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  color: #de2e2e;
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .opportunity-page-heading,
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunity-page-heading h1 {
+    font-size: 32px;
+  }
+
+  .opportunity-form-card,
+  .roles-form-card {
+    padding: 20px;
+  }
+
+  .added-role {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

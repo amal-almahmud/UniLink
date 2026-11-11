@@ -1,6 +1,6 @@
 .dashboard-layout {
   min-height: 100vh;
-  background-color: var(--background);
+  background: #f4f6fa;
 }
 
 .dashboard-main {
@@ -10,6 +10,12 @@
 }
 
 .dashboard-content {
+  min-height: calc(100vh - 96px);
+  padding: 32px 40px;
+  background: #f4f6fa;
+}
+
+.dashboard-page-container {
   width: 100%;
   min-height: calc(100vh - 82px);
   padding: 28px 30px;
