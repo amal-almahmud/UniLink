@@ -12,6 +12,9 @@ function CreateUniversityOpportunity() {
         description: "",
         category: "",
         opportunityType: "",
+        officialSource: "",
+        registrationLink: "",
+        registrationInstructions: "",
       });
     
     const handleChange = (event) => {
@@ -81,6 +84,34 @@ function CreateUniversityOpportunity() {
         <option value="Workshop">Workshop</option>
         <option value="Club Activity">Club Activity</option>
         </Select>
+
+        <Input
+        label="Official Source"
+        name="officialSource"
+        type="url"
+        placeholder="https://example.com"
+        value={formData.officialSource}
+        onChange={handleChange}
+        required
+        />
+
+        <Input
+        label="Registration Link"
+        name="registrationLink"
+        type="url"
+        placeholder="https://example.com/register"
+        value={formData.registrationLink}
+        onChange={handleChange}
+        />
+
+        <Textarea
+        label="Registration Instructions"
+        name="registrationInstructions"
+        placeholder="Explain how students can register for this opportunity"
+        value={formData.registrationInstructions}
+        onChange={handleChange}
+        rows={4}
+        />
 
       </section>
     </DashboardLayout>
