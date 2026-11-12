@@ -15,6 +15,9 @@ function CreateUniversityOpportunity() {
         officialSource: "",
         registrationLink: "",
         registrationInstructions: "",
+        eventDate: "",
+        eventLocation: "",
+        registrationDeadline: "",
       });
     
     const handleChange = (event) => {
@@ -113,6 +116,32 @@ function CreateUniversityOpportunity() {
         rows={4}
         />
 
+        <Input
+        label="Event Date"
+        name="eventDate"
+        type="date"
+        value={formData.eventDate}
+        onChange={handleChange}
+        required
+        />
+        <Input
+        label="Event Location"
+        name="eventLocation"
+        type="text"
+        placeholder="Enter event location"
+        value={formData.eventLocation}
+        onChange={handleChange}
+        required
+        />
+
+        <Input
+        label="Registration Deadline"
+        name="registrationDeadline"
+        type="date"
+        value={formData.registrationDeadline}
+        onChange={handleChange}
+        required
+        />
       </section>
     </DashboardLayout>
   );
