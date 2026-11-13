@@ -123,4 +123,16 @@
     flex-wrap: wrap;
   }
   
-  
+  .error-message,
+.field-error,
+.form-error {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: #dc2626;
+}

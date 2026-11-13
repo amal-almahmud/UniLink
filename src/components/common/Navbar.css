@@ -189,3 +189,18 @@
     display: none;
   }
 }
+
+.navbar-notification {
+  position: relative;
+}
+
+.navbar-notification-dot {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 9px;
+  height: 9px;
+  background-color: #dc2626;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}

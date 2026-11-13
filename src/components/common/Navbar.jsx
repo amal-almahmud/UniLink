@@ -1,4 +1,11 @@
-import { Search, Bell, UserRound, ChevronRight, Menu } from "lucide-react";
+import { useNavigate } from "react-router";
+import {
+  Search,
+  Bell,
+  UserRound,
+  ChevronRight,
+  Menu,
+} from "lucide-react";
 import "./Navbar.css";
 
 function Navbar({
@@ -7,6 +14,8 @@ function Navbar({
   hasNotifications = false,
   onMenuClick,
 }) {
+  const navigate = useNavigate();
+
   return (
     <header className="navbar">
       <button
@@ -32,6 +41,7 @@ function Navbar({
         className="navbar-notification"
         type="button"
         aria-label="Notifications"
+        onClick={() => navigate("/notifications")}
       >
         <Bell size={24} />
 
@@ -40,7 +50,10 @@ function Navbar({
         )}
       </button>
 
-      <button className="navbar-profile" type="button">
+      <button
+        className="navbar-profile"
+        type="button"
+      >
         <span className="navbar-avatar">
           <UserRound size={25} />
         </span>

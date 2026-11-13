@@ -20,8 +20,14 @@ function Sidebar({
   const accountAreaRoutes = {
     "Find a Team": "/find-teams",
     "Manage a Team": "/my-team",
-    "Publish an Opportunity": "/create-university-opportunity"
+    "Publish an Opportunity": "/create-university-opportunity",
   };
+
+  const accountAreas = [
+    "Find a Team",
+    "Manage a Team",
+    "Publish an Opportunity",
+  ];
 
   function handleAreaClick(area) {
     onAreaChange?.(area);
@@ -31,12 +37,9 @@ function Sidebar({
     if (route) {
       navigate(route);
     }
+
+    onClose?.();
   }
-  const accountAreas = [
-    "Find a Team",
-    "Manage a Team",
-    "Publish an Opportunity",
-  ];
 
   return (
     <>
@@ -141,10 +144,14 @@ function Sidebar({
 
           <div className="sidebar-divider" />
 
-          <button className="sidebar-logout" type="button">
+          <NavLink
+            className="sidebar-logout"
+            to="/login"
+            onClick={onClose}
+          >
             <LogOut size={22} />
             <span>Log Out</span>
-          </button>
+          </NavLink>
         </div>
       </aside>
     </>

@@ -5,19 +5,16 @@ import {
   Routes,
 } from "react-router";
 
-// Authentication pages
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 
-// Shared pages
 import Dashboard from "./pages/shared/Dashboard";
 import Notifications from "./pages/shared/Notifications";
 import Profile from "./pages/shared/Profile";
 import Settings from "./pages/shared/Settings";
 
-// Team seeker pages
 import BrowseOpportunities from "./pages/teamSeeker/BrowseOpportunities";
 import FindTeams from "./pages/teamSeeker/FindTeams";
 import TeamDetails from "./pages/teamSeeker/TeamDetails";
@@ -26,7 +23,6 @@ import PublishTeamRequest from "./pages/teamSeeker/PublishTeamRequest";
 import MyApplications from "./pages/teamSeeker/MyApplications";
 import Invitations from "./pages/teamSeeker/Invitations";
 
-// Team leader pages
 import Applications from "./pages/teamLeader/Applications";
 import ApplicantProfile from "./pages/teamLeader/ApplicantProfile";
 import CreateTeamOpportunity from "./pages/teamLeader/CreateTeamOpportunity";
@@ -39,18 +35,17 @@ import CreateUniversityOpportunity from "./pages/opportunityPublisher/CreateUniv
 import MyPublishedOpportunities from "./pages/opportunityPublisher/MyPublishedOpportunities";
 import PublishedOpportunityDetails from "./pages/opportunityPublisher/PublishedOpportunityDetails";
 import EditPublishedOpportunity from "./pages/opportunityPublisher/EditPublishedOpportunity";
+import opportunityPublisherSidebarItems from "./pages/opportunityPublisher/opportunityPublisherSidebarItems";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default route */}
         <Route
           path="/"
           element={<Navigate to="/login" replace />}
         />
 
-        {/* Authentication routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -64,7 +59,6 @@ function App() {
           element={<ResetPassword />}
         />
 
-        {/* Shared routes */}
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route
@@ -75,10 +69,29 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
 
-        {/* Team seeker routes */}
         <Route
           path="/browse-opportunities"
           element={<BrowseOpportunities />}
+        />
+
+        <Route
+          path="/publisher-browse-opportunities"
+          element={
+            <BrowseOpportunities
+              sidebarItems={opportunityPublisherSidebarItems}
+              activeArea="Publish an Opportunity"
+            />
+          }
+        />
+
+        <Route
+          path="/check-existing-opportunities"
+          element={
+            <BrowseOpportunities
+              sidebarItems={opportunityPublisherSidebarItems}
+              activeArea="Publish an Opportunity"
+            />
+          }
         />
 
         <Route path="/find-teams" element={<FindTeams />} />
@@ -108,7 +121,6 @@ function App() {
           element={<Invitations />}
         />
 
-        {/* Team leader routes */}
         <Route
           path="/my-opportunities"
           element={<MyOpportunities />}
@@ -141,7 +153,6 @@ function App() {
           element={<TeamUpdates />}
         />
 
-        {/* Unknown routes */}
         <Route
           path="/create-university-opportunity"
           element={<CreateUniversityOpportunity />}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import opportunityPublisherSidebarItems from "../opportunityPublisher/opportunityPublisherSidebarItems";
 import {
   Search,
   UsersRound,
@@ -73,28 +74,7 @@ const sidebarItemsByArea = {
     },
   ],
 
-  "Publish an Opportunity": [
-    {
-      label: "Browse Opportunities",
-      to: "/browse-opportunities",
-      icon: Compass,
-    },
-    {
-      label: "Check Existing Opportunities",
-      to: "/existing-opportunities",
-      icon: Search,
-    },
-    {
-      label: "Post University Opportunity",
-      to: "/publish-opportunity",
-      icon: Plus,
-    },
-    {
-      label: "My Posted Opportunities",
-      to: "/posted-opportunities",
-      icon: FileText,
-    },
-  ],
+ "Publish an Opportunity": opportunityPublisherSidebarItems,
 };
 
 const actionCards = [
