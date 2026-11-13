@@ -78,3 +78,44 @@ I ran `npm run build`, and the project built successfully. I also tested the pag
 
 - `C01`
 - `A01`
+
+
+# Sara Almulhim
+
+### AI Tools Used
+
+- ChatGPT (GPT-6)
+
+### Purpose of Use
+
+- Assisting with React front-end implementation
+- Creating and validating university opportunity forms
+- Implementing publishing, draft saving, editing, and withdrawal
+- Developing the Check Existing Opportunities search feature
+- Improving page styling and responsive design
+- Debugging navigation and React Router issues
+- Reviewing Git and GitHub integration
+
+### Files Affected
+
+- `src/App.jsx`
+- `src/components/common/Sidebar.jsx`
+- `src/pages/opportunityPublisher/CreateUniversityOpportunity.jsx`
+- `src/pages/opportunityPublisher/CreateUniversityOpportunity.css`
+- `src/pages/opportunityPublisher/MyPublishedOpportunities.jsx`
+- `src/pages/opportunityPublisher/MyPublishedOpportunities.css`
+- `src/pages/opportunityPublisher/PublishedOpportunityDetails.jsx`
+- `src/pages/opportunityPublisher/PublishedOpportunityDetails.css`
+- `src/pages/opportunityPublisher/EditPublishedOpportunity.jsx`
+- `src/pages/opportunityPublisher/opportunityStorage.js`
+- `src/pages/opportunityPublisher/kfupmPrograms.js`
+- `src/pages/opportunityPublisher/opportunityPublisherSidebarItems.js`
+
+### Verification
+
+I ran `npm run build`, and the project built successfully. I also tested creating, publishing, saving drafts, editing, withdrawing, searching for opportunities, form validation, navigation, and responsive layouts in the browser. My work was merged into `main` through PR #8 and PR #11.
+
+### Evidence IDs
+
+- `C02`
+- `A02`
