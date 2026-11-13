@@ -51,6 +51,15 @@ function MyPublishedOpportunities() {
         >
             Drafts
         </button>
+
+        <button
+        type="button"
+        className={statusFilter === "withdrawn" ? "active" : ""}
+        onClick={() => setStatusFilter("withdrawn")}
+        >
+        Withdrawn
+        </button>
+
         </div>
 
         <div className="opportunities-list">
@@ -66,11 +75,16 @@ function MyPublishedOpportunities() {
                 <p>Event Date: {opportunity.eventDate || "Not specified"}</p>
 
                 <p>Status: {opportunity.status}</p>
-
-                <Link to={`/published-opportunity/${opportunity.id}`}>
-                View Details
-                </Link>
-
+                <div className="opportunity-card-actions">
+                    <Link to={`/published-opportunity/${opportunity.id}`}>
+                    View Details
+                    </Link>
+                    {opportunity.status !== "withdrawn" && (
+                    <Link to={`/edit-published-opportunity/${opportunity.id}`}>
+                        Edit
+                    </Link>
+                    )}
+                </div>
             </div>
             ))
         )}

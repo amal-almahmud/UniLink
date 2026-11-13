@@ -19,6 +19,7 @@ import TeamUpdates from "./pages/teamLeader/TeamUpdates";
 import CreateUniversityOpportunity from "./pages/opportunityPublisher/CreateUniversityOpportunity";
 import MyPublishedOpportunities from "./pages/opportunityPublisher/MyPublishedOpportunities";
 import PublishedOpportunityDetails from "./pages/opportunityPublisher/PublishedOpportunityDetails";
+import EditPublishedOpportunity from "./pages/opportunityPublisher/EditPublishedOpportunity";
 
 function App() {
   return (
@@ -92,6 +93,11 @@ function App() {
         <Route
           path="/published-opportunity/:id"
           element={<PublishedOpportunityDetails />}
+        />
+
+        <Route
+          path="/edit-published-opportunity/:id"
+          element={<EditPublishedOpportunity />}
         />
 
         <Route
