@@ -7,6 +7,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import opportunityPublisherSidebarItems from "./opportunityPublisherSidebarItems";
 import { undergraduateMajors, mxPrograms , phdPrograms } from "./kfupmPrograms";
 import Button from "../../components/common/Button";
+import { savePublisherOpportunity } from "./opportunityStorage";
 
 function CreateUniversityOpportunity() {
 
@@ -155,15 +156,36 @@ function CreateUniversityOpportunity() {
     
         const [formMessage, setFormMessage] = useState("");
 
+    
     const handleSubmit = () => {
         const isValid = validateForm();
-
-        if (isValid) {
-            setFormMessage("All information is valid and ready to publish.");
-        } else {
-            setFormMessage("Please correct the errors in the form.");
+        if (!isValid) {
+        setFormMessage("Please correct the errors in the form.");
+        return;
+        }
+        try {
+        savePublisherOpportunity(formData, "published");
+    
+        setFormMessage("Opportunity published successfully!");
+        } catch (error) {
+        console.error("Error publishing opportunity:", error);
+        setFormMessage("Unable to publish opportunity. Please try again.");
         }
     };
+    
+    const handleSaveDraft = () => {
+        try {
+        savePublisherOpportunity(formData, "draft");
+    
+        setErrors({});
+        setFormMessage("Draft saved successfully!");
+        } catch (error) {
+        console.error("Error saving draft:", error);
+    
+        setFormMessage("Unable to save draft. Please try again.");
+        }
+    };
+  
 
 
     const mxGroup = "MX Master's Programs";
@@ -527,9 +549,16 @@ function CreateUniversityOpportunity() {
           <p role="status">{formMessage}</p>
         )}
 
-        <Button type="button" onClick={handleSubmit}>
-          Submit Opportunity
+        <div className="opportunity-actions">
+       
+        <Button type="button" variant="secondary" onClick={handleSaveDraft}>
+            Save as Draft
         </Button>
+
+        <Button type="button" onClick={handleSubmit}>
+            Submit Opportunity
+        </Button>
+        </div>
 
       </section>
     </DashboardLayout>

@@ -114,5 +114,13 @@
     font-size: 14px;
     margin-top: 8px;
   }
+
+.opportunity-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
   
   
