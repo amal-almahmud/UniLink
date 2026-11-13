@@ -7,6 +7,7 @@ import {
 
 import Dashboard from "./pages/shared/Dashboard";
 import Profile from "./pages/shared/Profile";
+import BrowseOpportunities from "./pages/teamSeeker/BrowseOpportunities";
 
 import Applications from "./pages/teamLeader/Applications";
 import ApplicantProfile from "./pages/teamLeader/ApplicantProfile";
@@ -69,7 +70,10 @@ function App() {
           path="/team-updates"
           element={<TeamUpdates />}
         />
-
+         <Route
+           path="/browse-opportunities"
+           element={<BrowseOpportunities />}
+/>
         <Route
           path="*"
           element={<Navigate to="/dashboard" replace />}
