@@ -50,3 +50,21 @@
     color: white;
   }
   
+.opportunity-card-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .opportunity-card-actions a {
+    color: #17345c;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .opportunity-card-actions a:hover {
+    text-decoration: underline;
+  }
+  
