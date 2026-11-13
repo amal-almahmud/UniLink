@@ -1,5 +1,6 @@
 import "./CreateUniversityOpportunity.css";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Input from "../../components/common/Input";
 import Textarea from "../../components/common/Textarea";
 import Select from "../../components/common/Select";
@@ -37,6 +38,7 @@ function CreateUniversityOpportunity() {
     
     const [errors, setErrors] = useState({});
 
+    const navigate = useNavigate();
     
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -164,21 +166,28 @@ function CreateUniversityOpportunity() {
         return;
         }
         try {
-        savePublisherOpportunity(formData, "published");
-    
-        setFormMessage("Opportunity published successfully!");
+        const newOpportunity = savePublisherOpportunity(
+            formData,
+            "published"
+        );
+
+        navigate(`/published-opportunity/${newOpportunity.id}`);
         } catch (error) {
         console.error("Error publishing opportunity:", error);
+
         setFormMessage("Unable to publish opportunity. Please try again.");
         }
+
     };
     
     const handleSaveDraft = () => {
         try {
-        savePublisherOpportunity(formData, "draft");
+        const newOpportunity = savePublisherOpportunity(
+            formData,
+            "draft"
+        );
     
-        setErrors({});
-        setFormMessage("Draft saved successfully!");
+        navigate(`/published-opportunity/${newOpportunity.id}`);
         } catch (error) {
         console.error("Error saving draft:", error);
     
@@ -186,8 +195,7 @@ function CreateUniversityOpportunity() {
         }
     };
   
-
-
+  
     const mxGroup = "MX Master's Programs";
     const phdGroup = "PhD Programs";
     const colleges = Object.keys(undergraduateMajors);
