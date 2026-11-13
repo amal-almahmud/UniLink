@@ -2,16 +2,19 @@ import{useId} from 'react';
 import{ChevronDown} from "lucide-react";
 import "./Select.css";
 
+
 function Select({
-    id,
-    label,
-    required=false,
-    error="",
-    helperText = "",
-    className = "",
-    children,
+  id,
+  label,
+  required = false,
+  error = "",
+  helperText = "",
+  className = "",
+  children,
+  options = [],
+  placeholder = "Select an option",
   ...props
-}){
+}) {
 const generatedId = useId();
 const selectId = id || generatedId;
 
@@ -40,7 +43,27 @@ return(
           }
           {...props}
         >
-          {children}
+        {children ? (
+          children
+        ) : (
+          <>
+            <option value="">{placeholder}</option>
+
+            {options.map((option) => {
+              const optionValue =
+                typeof option === "string" ? option : option.value;
+
+              const optionLabel =
+                typeof option === "string" ? option : option.label;
+
+              return (
+                <option key={optionValue} value={optionValue}>
+                  {optionLabel}
+                </option>
+              );
+            })}
+          </>
+        )}
         </select>
 
         <ChevronDown

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Search,
   UsersRound,
@@ -14,31 +15,32 @@ import {
 import DashboardLayout from "../../layouts/DashboardLayout";
 import "./Dashboard.css";
 
+
 const sidebarItemsByArea = {
   "Find a Team": [
     {
       label: "Browse Opportunities",
-      to: "/opportunities",
+      to: "/browse-opportunities",
       icon: Compass,
     },
     {
       label: "Saved Opportunities",
-      to: "/saved-opportunities",
+      to: "/browse-opportunities",
       icon: Bookmark,
     },
     {
       label: "Find a Team",
-      to: "/find-team",
+     to: "/find-teams",
       icon: UsersRound,
     },
     {
       label: "Looking for a Team",
-      to: "/looking-for-team",
+     to: "/publish-team-request",
       icon: Search,
     },
     {
       label: "My Applications and Invitations",
-      to: "/applications",
+      to: "/my-applications",
       icon: FileText,
     },
   ],
@@ -74,7 +76,7 @@ const sidebarItemsByArea = {
   "Publish an Opportunity": [
     {
       label: "Browse Opportunities",
-      to: "/opportunities",
+      to: "/browse-opportunities",
       icon: Compass,
     },
     {
@@ -155,6 +157,20 @@ const opportunities = [
 
 function Dashboard({ userName = "Student Name" }) {
   const [activeArea, setActiveArea] = useState("Find a Team");
+  const navigate = useNavigate();
+
+  const areaRoutes = {
+    "Find a Team": "/find-teams",
+    "Manage a Team": "/my-team",
+  };
+
+  function handleAreaChange(area) {
+    setActiveArea(area);
+
+    if (areaRoutes[area]) {
+      navigate(areaRoutes[area]);
+    }
+  }
   const firstName = userName.split(" ")[0];
 
   const sidebarItems = sidebarItemsByArea[activeArea];
@@ -163,7 +179,7 @@ function Dashboard({ userName = "Student Name" }) {
     <DashboardLayout
       sidebarItems={sidebarItems}
       activeArea={activeArea}
-      onAreaChange={setActiveArea}
+      onAreaChange={handleAreaChange}
       studentName={userName}
     >
       <section className="dashboard-page">
@@ -183,7 +199,7 @@ function Dashboard({ userName = "Student Name" }) {
                 key={action.title}
                 className="dashboard-action-card"
                 type="button"
-                onClick={() => setActiveArea(action.title)}
+                onClick={() => handleAreaChange(action.title)}
               >
                 <Icon className="dashboard-action-icon" size={25} />
 
@@ -232,14 +248,14 @@ function Dashboard({ userName = "Student Name" }) {
           <article className="dashboard-panel">
             <div className="dashboard-panel-heading">
               <h2>Recommended Opportunities</h2>
-              <a href="/opportunities">View all</a>
+              <a href="/browse-opportunities">View all</a>
             </div>
 
             <div className="dashboard-opportunities">
               {opportunities.map((opportunity) => (
                 <a
                   className="dashboard-opportunity"
-                  href="/opportunity-details"
+                  href="/browse-opportunities"
                   key={opportunity.title}
                 >
                   <span className="dashboard-opportunity-icon">
@@ -308,7 +324,7 @@ function Dashboard({ userName = "Student Name" }) {
           <article className="dashboard-panel">
             <div className="dashboard-panel-heading">
               <h2>Recent Applications</h2>
-              <a href="/applications">View all</a>
+              <a href="/my-applications">View all</a>
             </div>
 
             <div className="dashboard-list-row">
