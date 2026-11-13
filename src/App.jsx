@@ -86,12 +86,7 @@ function App() {
 
         <Route
           path="/check-existing-opportunities"
-          element={
-            <BrowseOpportunities
-              sidebarItems={opportunityPublisherSidebarItems}
-              activeArea="Publish an Opportunity"
-            />
-          }
+          element={<CreateUniversityOpportunity />}
         />
 
         <Route path="/find-teams" element={<FindTeams />} />
