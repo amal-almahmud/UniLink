@@ -181,3 +181,24 @@
 .settings-cancel:hover {
   color: var(--blue);
 }
+
+.settings-form .input-field--error,
+.settings-form .select-field--error,
+.settings-form .textarea-field--error,
+.settings-form [aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.settings-form .input-field--error:focus,
+.settings-form .select-field--error:focus,
+.settings-form .textarea-field--error:focus,
+.settings-form [aria-invalid="true"]:focus {
+  border-color: #dc2626;
+  outline: 3px solid rgba(220, 38, 38, 0.15);
+}
+
+.settings-form .input-message--error,
+.settings-form .select-message--error,
+.settings-form .textarea-message--error {
+  color: #dc2626;
+}

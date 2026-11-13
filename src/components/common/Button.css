@@ -25,7 +25,11 @@
 }
 
 .button--primary:hover:not(:disabled) {
+  color: #ffffff;
   background-color: var(--navy-hover);
+  border-color: var(--navy-hover);
+  opacity: 1;
+  visibility: visible;
 }
 
 .button--secondary {
@@ -70,4 +74,26 @@
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.button.button--primary {
+  display: inline-flex !important;
+  color: #ffffff !important;
+  background-color: #0b1f3a !important;
+  border-color: #0b1f3a !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.button.button--primary:hover:not(:disabled) {
+  display: inline-flex !important;
+  color: #ffffff !important;
+  background-color: #184a7d !important;
+  border-color: #184a7d !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
 }

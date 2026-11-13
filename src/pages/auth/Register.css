@@ -291,3 +291,24 @@
     row-gap: 10px;
   }
 }
+
+.register-form .input-field--error,
+.register-form .input-field[aria-invalid="true"],
+.register-form .select-field--error,
+.register-form .select-field[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.register-form .input-field--error:focus,
+.register-form .input-field[aria-invalid="true"]:focus,
+.register-form .select-field--error:focus,
+.register-form .select-field[aria-invalid="true"]:focus {
+  border-color: #dc2626;
+  outline: 3px solid rgba(220, 38, 38, 0.15);
+}
+
+.register-form .input-message--error,
+.register-form .select-message--error,
+.register-terms-error {
+  color: #dc2626;
+}

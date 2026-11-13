@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import "./Login.css";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -39,11 +41,7 @@ function Login() {
     setErrors(newErrors);
 
     if (!newErrors.email && !newErrors.password) {
-      console.log({
-        email,
-        password,
-        rememberMe,
-      });
+      navigate("/dashboard");
     }
   }
 
