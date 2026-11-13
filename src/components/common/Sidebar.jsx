@@ -20,7 +20,7 @@ function Sidebar({
   const accountAreaRoutes = {
     "Find a Team": "/find-teams",
     "Manage a Team": "/my-team",
-    "Publish an Opportunity": "/create-university-opportunity",
+    "Publish an Opportunity": "/check-existing-opportunities",
   };
 
   const accountAreas = [
