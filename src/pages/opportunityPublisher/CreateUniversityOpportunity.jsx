@@ -6,6 +6,7 @@ import Select from "../../components/common/Select";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import opportunityPublisherSidebarItems from "./opportunityPublisherSidebarItems";
 import { undergraduateMajors, mxPrograms , phdPrograms } from "./kfupmPrograms";
+import Button from "../../components/common/Button";
 
 function CreateUniversityOpportunity() {
 
@@ -33,6 +34,8 @@ function CreateUniversityOpportunity() {
         otherRequirements: "",
       });
     
+    const [errors, setErrors] = useState({});
+
     
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -72,6 +75,96 @@ function CreateUniversityOpportunity() {
             : previous[name].filter((item) => item !== value),
         }));
     };
+
+    const isValidUrl = (value) => {
+        try {
+        const url = new URL(value);
+    
+        return url.protocol === "http:" ||
+                url.protocol === "https:";
+        } catch {
+        return false;
+        }
+    };
+  
+    const validateForm = () => {
+        const newErrors = {};
+    
+        const requiredFields = [
+        "title",
+        "description",
+        "category",
+        "opportunityType",
+        "officialSource",
+        "eventDate",
+        "eventLocation",
+        "registrationDeadline",
+        "academicLevel",
+        ];
+    
+        requiredFields.forEach((field) => {
+        if (!formData[field].trim()) {
+            newErrors[field] = "This field is required.";
+        }
+        });
+    
+        if (
+        (formData.academicLevel === "Undergraduate" ||
+            formData.academicLevel === "Both") &&
+        formData.studentYears.length === 0
+        ) {
+        newErrors.studentYears = "Select at least one student year.";
+        }
+    
+        if (
+        formData.majorsScope === "specific" &&
+        formData.eligibleMajors.length === 0
+        ) {
+        newErrors.eligibleMajors = "Select at least one major.";
+        }
+        
+        if (
+            formData.officialSource.trim() &&
+            !isValidUrl(formData.officialSource.trim())
+        ) {
+            newErrors.officialSource =
+            "Please enter a valid official source URL.";
+        }
+        
+        if (
+            formData.registrationLink.trim() &&
+            !isValidUrl(formData.registrationLink.trim())
+        ) {
+            newErrors.registrationLink =
+            "Please enter a valid registration URL.";
+        }
+        
+        if (
+            formData.eventDate &&
+            formData.registrationDeadline &&
+            formData.registrationDeadline > formData.eventDate
+        ) {
+            newErrors.registrationDeadline =
+            "Registration deadline cannot be after the event date.";
+        }
+  
+        setErrors(newErrors);
+    
+        return Object.keys(newErrors).length === 0;
+    };
+    
+        const [formMessage, setFormMessage] = useState("");
+
+    const handleSubmit = () => {
+        const isValid = validateForm();
+
+        if (isValid) {
+            setFormMessage("All information is valid and ready to publish.");
+        } else {
+            setFormMessage("Please correct the errors in the form.");
+        }
+    };
+
 
     const mxGroup = "MX Master's Programs";
     const phdGroup = "PhD Programs";
@@ -133,6 +226,7 @@ function CreateUniversityOpportunity() {
         value={formData.title}
         onChange={handleChange}
         required
+        error={errors.title}
         />
 
         <Textarea
@@ -143,6 +237,7 @@ function CreateUniversityOpportunity() {
         onChange={handleChange}
         rows={5}
         required
+        error={errors.description}
         />
 
         <Select
@@ -151,6 +246,7 @@ function CreateUniversityOpportunity() {
         value={formData.category}
         onChange={handleChange}
         required
+        error={errors.category}
         >
         <option value="">Select a category</option>
         <option value="Academic">Academic</option>
@@ -165,6 +261,7 @@ function CreateUniversityOpportunity() {
         value={formData.opportunityType}
         onChange={handleChange}
         required
+        error={errors.opportunityType}
         >
         <option value="">Select an opportunity type</option>
         <option value="Hackathon">Hackathon</option>
@@ -181,6 +278,7 @@ function CreateUniversityOpportunity() {
         value={formData.officialSource}
         onChange={handleChange}
         required
+        error={errors.officialSource}
         />
 
         <Input
@@ -190,6 +288,7 @@ function CreateUniversityOpportunity() {
         placeholder="https://example.com/register"
         value={formData.registrationLink}
         onChange={handleChange}
+        error={errors.registrationLink}
         />
 
         <Textarea
@@ -208,6 +307,7 @@ function CreateUniversityOpportunity() {
         value={formData.eventDate}
         onChange={handleChange}
         required
+        error={errors.eventDate}
         />
         <Input
         label="Event Location"
@@ -217,6 +317,7 @@ function CreateUniversityOpportunity() {
         value={formData.eventLocation}
         onChange={handleChange}
         required
+        error={errors.eventLocation}
         />
 
         <Input
@@ -226,6 +327,7 @@ function CreateUniversityOpportunity() {
         value={formData.registrationDeadline}
         onChange={handleChange}
         required
+        error={errors.registrationDeadline}
         />
 
         <section className="audience-section">
@@ -238,6 +340,7 @@ function CreateUniversityOpportunity() {
             value={formData.academicLevel}
             onChange={handleChange}
             required
+            error={errors.academicLevel}
             >
             <option value="">Select academic level</option>
             <option value="Undergraduate">Undergraduate</option>
@@ -248,7 +351,7 @@ function CreateUniversityOpportunity() {
             
             {(formData.academicLevel === "Undergraduate" ||
             formData.academicLevel === "Both") && (
-
+            <>
             <fieldset className="audience-group">
                 <legend>Eligible Student Years *</legend>
 
@@ -273,6 +376,13 @@ function CreateUniversityOpportunity() {
                 ))}
                 </div>
             </fieldset>
+
+            {errors.studentYears && (
+            <p className="audience-error">
+                {errors.studentYears}
+            </p>
+            )}
+            </>
             )}
 
             
@@ -373,7 +483,11 @@ function CreateUniversityOpportunity() {
             </div>
             )}
         </fieldset>
-
+        {errors.eligibleMajors && (
+            <p className="audience-error">
+            {errors.eligibleMajors}
+            </p>
+        )}
 
             <fieldset className="audience-group">
             <legend>Required Skills</legend>
@@ -409,6 +523,13 @@ function CreateUniversityOpportunity() {
             />
         </div>
         </section>
+        {formMessage && (
+          <p role="status">{formMessage}</p>
+        )}
+
+        <Button type="button" onClick={handleSubmit}>
+          Submit Opportunity
+        </Button>
 
       </section>
     </DashboardLayout>
