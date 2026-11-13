@@ -82,7 +82,10 @@ const categories = [
   "Extracurricular",
 ];
 
-export default function BrowseOpportunities() {
+export default function BrowseOpportunities({
+  sidebarItems = teamSeekerSidebarItems,
+  activeArea = "Find a Team",
+}) {
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -123,8 +126,8 @@ export default function BrowseOpportunities() {
 
   return (
     <DashboardLayout
-      activeArea="Find a Team"
-      sidebarItems={teamSeekerSidebarItems}
+      activeArea={activeArea}
+      sidebarItems={sidebarItems}
     >
       <section className="browse-opportunities-page">
         <header className="browse-heading">
