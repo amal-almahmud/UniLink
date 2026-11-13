@@ -1,0 +1,257 @@
+.apply-to-team-page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.application-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #164d82;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.application-heading {
+  margin-bottom: 24px;
+}
+
+.application-heading h1 {
+  margin: 0 0 8px;
+  color: #10294b;
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.application-heading p {
+  margin: 0;
+  color: #718097;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.application-heading strong {
+  color: #164d82;
+}
+
+.team-application-form {
+  overflow: hidden;
+  border: 1px solid #d8e0eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.application-form-section {
+  padding: 26px;
+}
+
+.application-form-section h2 {
+  margin: 0 0 22px;
+  color: #10294b;
+  font-size: 20px;
+}
+
+.application-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.application-field > span {
+  color: #34445d;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.application-field b {
+  color: #d93030;
+}
+
+.application-field input,
+.application-field select,
+.application-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccd7e5;
+  border-radius: 8px;
+  outline: 0;
+  background: #ffffff;
+  color: #10294b;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.application-field input,
+.application-field select {
+  min-height: 46px;
+  padding: 0 13px;
+}
+
+.application-field textarea {
+  resize: vertical;
+  padding: 13px;
+  line-height: 1.6;
+}
+
+.application-field input:focus,
+.application-field select:focus,
+.application-field textarea:focus {
+  border-color: #2f72b7;
+  box-shadow: 0 0 0 3px rgba(47, 114, 183, 0.12);
+}
+
+.application-field .field-error {
+  border-color: #d93030;
+}
+
+.application-error {
+  color: #c62828;
+  font-size: 12px;
+}
+
+.field-helper-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #718097;
+}
+
+.field-helper-row small {
+  font-size: 12px;
+}
+
+.application-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #52647c;
+  font-size: 13px;
+  line-height: 1.55;
+  cursor: pointer;
+}
+
+.application-agreement input {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: #164d82;
+}
+
+.application-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 26px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.cancel-application-button,
+.submit-application-button {
+  min-height: 44px;
+  padding: 0 19px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancel-application-button {
+  border: 1px solid #b9c6d5;
+  background: #ffffff;
+  color: #52647c;
+}
+
+.submit-application-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #164d82;
+  background: #164d82;
+  color: #ffffff;
+}
+
+.submit-application-button:hover {
+  background: #103d69;
+}
+
+.application-success-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(13, 37, 69, 0.58);
+}
+
+.application-success-modal {
+  width: min(480px, 100%);
+  padding: 34px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+  text-align: center;
+}
+
+.application-success-modal > svg {
+  color: #198044;
+}
+
+.application-success-modal h2 {
+  margin: 16px 0 10px;
+  color: #10294b;
+  font-size: 24px;
+}
+
+.application-success-modal p {
+  margin: 0 0 22px;
+  color: #718097;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.application-success-modal button {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 8px;
+  background: #164d82;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 750px) {
+  .application-heading h1 {
+    font-size: 27px;
+  }
+
+  .application-heading p {
+    font-size: 15px;
+  }
+
+  .application-form-section {
+    padding: 20px;
+  }
+
+  .application-form-actions {
+    flex-direction: column-reverse;
+    padding: 16px 20px;
+  }
+
+  .cancel-application-button,
+  .submit-application-button {
+    width: 100%;
+  }
+
+  .application-success-modal {
+    padding: 26px 20px;
+  }
+}
