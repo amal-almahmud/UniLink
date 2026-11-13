@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useState } from "react";
 import "./MyPublishedOpportunities.css";
 import DashboardLayout from "../../layouts/DashboardLayout";
@@ -65,6 +66,11 @@ function MyPublishedOpportunities() {
                 <p>Event Date: {opportunity.eventDate || "Not specified"}</p>
 
                 <p>Status: {opportunity.status}</p>
+
+                <Link to={`/published-opportunity/${opportunity.id}`}>
+                View Details
+                </Link>
+
             </div>
             ))
         )}
