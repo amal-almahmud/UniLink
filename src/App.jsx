@@ -7,7 +7,13 @@ import {
 
 import Dashboard from "./pages/shared/Dashboard";
 import Profile from "./pages/shared/Profile";
-
+import BrowseOpportunities from "./pages/teamSeeker/BrowseOpportunities";
+import FindTeams from "./pages/teamSeeker/FindTeams";
+import TeamDetails from "./pages/teamSeeker/TeamDetails";
+import ApplyToTeam from "./pages/teamSeeker/ApplyToTeam";
+import PublishTeamRequest from "./pages/teamSeeker/PublishTeamRequest";
+import MyApplications from "./pages/teamSeeker/MyApplications";
+import Invitations from "./pages/teamSeeker/Invitations";
 import Applications from "./pages/teamLeader/Applications";
 import ApplicantProfile from "./pages/teamLeader/ApplicantProfile";
 import CreateTeamOpportunity from "./pages/teamLeader/CreateTeamOpportunity";
@@ -74,7 +80,11 @@ function App() {
           path="/team-updates"
           element={<TeamUpdates />}
         />
-
+         <Route
+           path="/browse-opportunities"
+           element={<BrowseOpportunities />}
+          />
+        
         <Route
           path="/create-university-opportunity"
           element={<CreateUniversityOpportunity />}
@@ -104,6 +114,30 @@ function App() {
           path="*"
           element={<Navigate to="/dashboard" replace />}
         />
+        <Route
+          path="/find-teams"
+          element={<FindTeams />}
+        />
+        <Route
+         path="/team-details"
+         element={<TeamDetails />}
+       />
+       <Route
+        path="/apply-to-team"
+        element={<ApplyToTeam />}
+     />
+       <Route
+        path="/publish-team-request"
+        element={<PublishTeamRequest />}
+     />
+      <Route
+       path="/my-applications"
+       element={<MyApplications />}
+     />
+     <Route
+      path="/invitations"
+      element={<Invitations />}
+    />
       </Routes>
     </BrowserRouter>
   );

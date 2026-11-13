@@ -1,0 +1,254 @@
+.publish-request-page {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.publish-request-heading {
+  margin-bottom: 24px;
+}
+
+.publish-request-heading h1 {
+  margin: 0 0 8px;
+  color: #10294b;
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.publish-request-heading p {
+  max-width: 760px;
+  margin: 0;
+  color: #718097;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.publish-request-form {
+  overflow: hidden;
+  border: 1px solid #d8e0eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.request-form-content {
+  padding: 26px;
+}
+
+.request-form-content h2 {
+  margin: 0 0 22px;
+  color: #10294b;
+  font-size: 20px;
+}
+
+.request-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.request-field > span {
+  color: #34445d;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.request-field b {
+  color: #d93030;
+}
+
+.request-field input,
+.request-field select,
+.request-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccd7e5;
+  border-radius: 8px;
+  outline: 0;
+  background: #ffffff;
+  color: #10294b;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.request-field input,
+.request-field select {
+  min-height: 46px;
+  padding: 0 13px;
+}
+
+.request-field textarea {
+  resize: vertical;
+  padding: 13px;
+  line-height: 1.6;
+}
+
+.request-field input:focus,
+.request-field select:focus,
+.request-field textarea:focus {
+  border-color: #2f72b7;
+  box-shadow: 0 0 0 3px rgba(47, 114, 183, 0.12);
+}
+
+.request-field .request-field-error {
+  border-color: #d93030;
+}
+
+.request-error-message {
+  color: #c62828;
+  font-size: 12px;
+}
+
+.request-helper-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #718097;
+}
+
+.request-helper-row small {
+  font-size: 12px;
+}
+
+.request-two-column {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.request-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 26px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.request-cancel-button,
+.request-submit-button {
+  min-height: 44px;
+  padding: 0 19px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.request-cancel-button {
+  border: 1px solid #b9c6d5;
+  background: #ffffff;
+  color: #52647c;
+}
+
+.request-submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #164d82;
+  background: #164d82;
+  color: #ffffff;
+}
+
+.request-submit-button:hover {
+  background: #103d69;
+}
+
+.request-success-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(13, 37, 69, 0.58);
+}
+
+.request-success-modal {
+  width: min(500px, 100%);
+  padding: 34px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+  text-align: center;
+}
+
+.request-success-modal > svg {
+  color: #198044;
+}
+
+.request-success-modal h2 {
+  margin: 16px 0 10px;
+  color: #10294b;
+  font-size: 24px;
+}
+
+.request-success-modal p {
+  margin: 0 0 22px;
+  color: #718097;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.request-success-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.request-success-actions button {
+  min-height: 44px;
+  padding: 0 19px;
+  border: 1px solid #164d82;
+  border-radius: 8px;
+  background: #164d82;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.request-success-actions .request-secondary-button {
+  background: #ffffff;
+  color: #164d82;
+}
+
+@media (max-width: 750px) {
+  .publish-request-heading h1 {
+    font-size: 27px;
+  }
+
+  .publish-request-heading p {
+    font-size: 15px;
+  }
+
+  .request-form-content {
+    padding: 20px;
+  }
+
+  .request-two-column {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .request-form-actions {
+    flex-direction: column-reverse;
+    padding: 16px 20px;
+  }
+
+  .request-cancel-button,
+  .request-submit-button {
+    width: 100%;
+  }
+
+  .request-success-modal {
+    padding: 26px 20px;
+  }
+
+  .request-success-actions {
+    flex-direction: column;
+  }
+
+  .request-success-actions button {
+    width: 100%;
+  }
+}
