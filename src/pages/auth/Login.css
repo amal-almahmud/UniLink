@@ -400,3 +400,18 @@
   margin-bottom: 11px;
   font-size: 12px;
 }
+
+.login-form .input-field--error,
+.login-form .input-field[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.login-form .input-field--error:focus,
+.login-form .input-field[aria-invalid="true"]:focus {
+  border-color: #dc2626;
+  outline: 3px solid rgba(220, 38, 38, 0.15);
+}
+
+.login-form .input-message--error {
+  color: #dc2626;
+}

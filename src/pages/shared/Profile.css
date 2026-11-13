@@ -207,3 +207,24 @@
 .profile-form .textarea-field::placeholder {
   color: #98a2b3;
 }
+
+.profile-form .input-field--error,
+.profile-form .select-field--error,
+.profile-form .textarea-field--error,
+.profile-form [aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.profile-form .input-field--error:focus,
+.profile-form .select-field--error:focus,
+.profile-form .textarea-field--error:focus,
+.profile-form [aria-invalid="true"]:focus {
+  border-color: #dc2626;
+  outline: 3px solid rgba(220, 38, 38, 0.15);
+}
+
+.profile-form .input-message--error,
+.profile-form .select-message--error,
+.profile-form .textarea-message--error {
+  color: #dc2626;
+}

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import {
   LayoutDashboard,
   UserRound,
@@ -15,6 +15,22 @@ function Sidebar({
   isOpen = false,
   onClose,
 }) {
+  const navigate = useNavigate();
+
+  const accountAreaRoutes = {
+    "Find a Team": "/find-teams",
+    "Manage a Team": "/my-team",
+  };
+
+  function handleAreaClick(area) {
+    onAreaChange?.(area);
+
+    const route = accountAreaRoutes[area];
+
+    if (route) {
+      navigate(route);
+    }
+  }
   const accountAreas = [
     "Find a Team",
     "Manage a Team",
@@ -59,7 +75,7 @@ function Sidebar({
                   : ""
               }`}
               type="button"
-              onClick={() => onAreaChange?.(area)}
+              onClick={() => handleAreaClick(area)}
             >
               {area}
             </button>
