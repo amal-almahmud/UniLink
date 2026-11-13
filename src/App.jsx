@@ -35,6 +35,11 @@ import MyOpportunities from "./pages/teamLeader/MyOpportunities";
 import MyTeam from "./pages/teamLeader/MyTeam";
 import TeamUpdates from "./pages/teamLeader/TeamUpdates";
 
+import CreateUniversityOpportunity from "./pages/opportunityPublisher/CreateUniversityOpportunity";
+import MyPublishedOpportunities from "./pages/opportunityPublisher/MyPublishedOpportunities";
+import PublishedOpportunityDetails from "./pages/opportunityPublisher/PublishedOpportunityDetails";
+import EditPublishedOpportunity from "./pages/opportunityPublisher/EditPublishedOpportunity";
+
 function App() {
   return (
     <BrowserRouter>
@@ -137,6 +142,31 @@ function App() {
         />
 
         {/* Unknown routes */}
+        <Route
+          path="/create-university-opportunity"
+          element={<CreateUniversityOpportunity />}
+        />
+
+        <Route
+          path="/publish-opportunity"
+          element={<CreateUniversityOpportunity />}
+        />
+
+        <Route
+          path="/my-published-opportunities"
+          element={<MyPublishedOpportunities />}
+        />
+
+        <Route
+          path="/published-opportunity/:id"
+          element={<PublishedOpportunityDetails />}
+        />
+
+        <Route
+          path="/edit-published-opportunity/:id"
+          element={<EditPublishedOpportunity />}
+        />
+
         <Route
           path="*"
           element={<Navigate to="/login" replace />}

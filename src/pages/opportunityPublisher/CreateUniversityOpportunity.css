@@ -1,0 +1,126 @@
+.audience-section {
+    margin-top: 32px;
+  }
+  
+  .audience-section h2 {
+    margin-bottom: 24px;
+    color: var(--navy);
+  }
+  
+  .audience-fields {
+    display: grid;
+    gap: 24px;
+  }
+  
+  .audience-group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  .audience-group legend {
+    margin-bottom: 12px;
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  .audience-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  
+  .audience-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .audience-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    min-height: 18px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    accent-color: var(--blue);
+  }
+  
+  @media (max-width: 600px) {
+    .audience-options {
+      grid-template-columns: 1fr;
+    }
+  }
+
+.majors-scope {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 12px;
+  }
+  
+  .majors-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  .majors-radio-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    min-height: 18px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    accent-color: var(--blue);
+  }
+  
+  .majors-picker {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  
+  .majors-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 16px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  
+  .majors-feedback {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  
+  @media (max-width: 600px) {
+    .majors-options {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+.audience-error {
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+.opportunity-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  
+  

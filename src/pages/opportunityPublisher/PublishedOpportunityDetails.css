@@ -1,0 +1,40 @@
+.details-back-link {
+    display: inline-block;
+    color: #17345c;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 24px;
+  }
+  
+  .details-back-link:hover {
+    text-decoration: underline;
+  }
+
+.details-card {
+    background-color: white;
+    border: 1px solid #dce3ed;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .details-card h2 {
+    color: #17345c;
+    font-size: 24px;
+    margin: 0 0 16px;
+  }
+  
+  .details-card p {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .details-card p + p {
+    margin-top: 12px;
+  }
+  
+  
