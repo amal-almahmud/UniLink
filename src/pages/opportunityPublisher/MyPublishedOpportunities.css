@@ -1,0 +1,52 @@
+.publisher-opportunities-page {
+    padding: 20px;
+  }
+  
+  .opportunities-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+  
+  .opportunity-card {
+    background-color: white;
+    border: 1px solid #dce3ed;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .opportunity-card h3 {
+    color: #17345c;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .opportunity-card p {
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+.opportunities-filters {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .opportunities-filters button {
+    padding: 10px 20px;
+    background-color: white;
+    color: #17345c;
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .opportunities-filters button.active {
+    background-color: #17345c;
+    color: white;
+  }
+  
