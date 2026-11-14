@@ -119,3 +119,44 @@ I ran `npm run build`, and the project built successfully. I also tested creatin
 
 - `C02`
 - `A02`
+
+## Daniah Aljufri – Team Leader
+
+### AI Tools Used
+
+- ChatGPT
+
+### Purpose of Use
+
+- Assisting with React component implementation
+- Debugging React Router and page navigation
+- Improving CSS styling, spacing, sizing, and responsive layouts
+- Fixing table layouts and action-button alignment
+- Explaining Git, GitHub, Vite, and build workflow
+
+### Files Affected
+
+- `src/App.jsx`
+- `src/pages/teamLeader/Applications.jsx`
+- `src/pages/teamLeader/Applications.css`
+- `src/pages/teamLeader/CreateTeamOpportunity.jsx`
+- `src/pages/teamLeader/CreateTeamOpportunity.css`
+- `src/pages/teamLeader/EditOpportunity.jsx`
+- `src/pages/teamLeader/MyOpportunities.jsx`
+- `src/pages/teamLeader/MyOpportunities.css`
+- `src/pages/teamLeader/MyTeam.jsx`
+- `src/pages/teamLeader/MyTeam.css`
+- `src/pages/teamLeader/TeamUpdates.jsx`
+- `src/pages/teamLeader/TeamUpdates.css`
+- `src/pages/teamLeader/ApplicantProfile.jsx`
+- `src/pages/teamLeader/ApplicantProfile.css`
+- `src/pages/teamLeader/teamLeaderSidebarItems.js`
+
+### Verification
+
+I reviewed and tested the AI-assisted code, compared the pages with the Figma designs, tested the website using the Vite development server, and verified the project using `npm run build`.
+
+### Evidence IDs
+
+- `C04`
+- `A04`
